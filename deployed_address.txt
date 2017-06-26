@@ -1,0 +1,2 @@
+To view deployed project, go to this address:
+http://54.241.155.26

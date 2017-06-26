@@ -1,0 +1,16 @@
+<div id="big_wrapper">
+
+  <h3>Login Component</h3>
+
+  <!--simple form with validations:-->
+  <form #loginForm='ngForm' (submit)="login(loginForm)">
+    <label for="username">Username:</label>
+    <input type="text" name="username" required minlength="4" maxlength="24" [(ngModel)]="user.name" #name="ngModel">
+    <button type="submit" [disabled]="!loginForm.valid">Login</button>
+  </form>
+
+  <div *ngIf="!name.valid && (name.touched || loginForm.submitted)">
+      <p class="red">Name required, min 4 char, max 24 char</p>
+  </div>
+
+</div>

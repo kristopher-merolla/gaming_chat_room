@@ -1,0 +1,29 @@
+#big_wrapper {
+    border: 1px solid green;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.right {
+    text-align: right;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+#vote_box {
+    width: 400px;
+}

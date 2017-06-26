@@ -1,0 +1,35 @@
+#big_wrapper {
+    border: 2px solid red;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.red {
+    color: red;
+}
+
+#newTopicSpace {
+    border: 1px dotted black;
+    padding: 2px;
+    width: 200px;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+.right {
+    text-align: right;
+}

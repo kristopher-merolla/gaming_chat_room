@@ -1,0 +1,84 @@
+<div id="big_wrapper">
+
+  <h3>Welcome: {{activeUser}}</h3>
+
+  <!--logout button-->
+  <div class="right">
+    <a (click)="logoutUser()">logout</a>
+  </div>
+
+  <h5>Current Polls:</h5>
+
+  <div *ngIf="topics">
+    <!--Check out the topics: {{ topics | json}}-->
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Survey Question</th>
+        <th>Date Posted</th>
+        <th>Action</th>
+      </tr>
+      <tr *ngFor="let topic of topics">
+        <td>{{topic.user}}</td>
+        <td><a href="/topic/{{topic._id}}">{{topic.title}}</a></td>
+        <td>{{topic.createdAt | date}}</td>
+        <td *ngIf="topic.user==activeUser"><a (click)="deleteTopic(topic._id)">Delete</a></td>
+        <td *ngIf="topic.user!=activeUser"></td>
+      </tr>
+    </table>
+  </div>
+
+  <!--<div *ngIf="errors">
+    Look, errors: {{ errors }}
+  </div>-->
+
+  <br>
+
+  <h5>Create new Poll:</h5>
+
+  <div id="newTopicSpace">
+      <!--simple form with validations:-->
+    <form #topicForm='ngForm' (submit)="addTopic(topicForm)">
+      <label for="title">Question:</label>
+      <input type="text" name="title" required minlength="8" [(ngModel)]="topic.title" #title="ngModel">
+      <br>
+      <label for="option_1">Option 1:</label>
+      <input type="text" name="option_1" required minlength="3" [(ngModel)]="topic.option_1" #option_1="ngModel">
+      <br>
+      <br>
+      <label for="option_2">Option 2:</label>
+      <input type="text" name="option_2" required minlength="3" [(ngModel)]="topic.option_2" #option_2="ngModel">
+      <br>
+      <br>
+      <label for="option_3">Option 3:</label>
+      <input type="text" name="option_3" required minlength="3" [(ngModel)]="topic.option_3" #option_3="ngModel">
+      <br>
+      <br>
+      <label for="option_4">Option 4:</label>
+      <input type="text" name="option_4" required minlength="3" [(ngModel)]="topic.option_4" #option_4="ngModel">
+      <br><br>
+      <button type="submit" [disabled]="!topicForm.valid">Create Poll</button>
+    </form>
+
+    <!--Errors to display if form not filled in right-->
+    <div *ngIf="!title.valid && (title.touched || topicForm.submitted)">
+        <p class="red">Question required, min 8 char</p>
+    </div>
+    <div *ngIf="!option_1.valid && (option_1.touched || topicForm.submitted)">
+        <p class="red">Option 1 required, min 3 char</p>
+    </div>
+    <div *ngIf="!option_2.valid && (option_2.touched || topicForm.submitted)">
+        <p class="red">Option 2 required, min 3 char</p>
+    </div>
+    <div *ngIf="!option_3.valid && (option_3.touched || topicForm.submitted)">
+        <p class="red">Option 3 required, min 3 char</p>
+    </div>
+    <div *ngIf="!option_4.valid && (option_4.touched || topicForm.submitted)">
+        <p class="red">Option 4 required, min 3 char</p>
+    </div>
+
+   <!--{{ topic | json}}-->
+
+  </div>
+
+</div>
