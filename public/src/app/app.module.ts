@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import {HttpModule} from '@angular/http';
 import {HttpService} from './http.service';
 
-import { CookieService } from 'angular2-cookie/services/cookies.service';
+import { CookieService } from 'angular2-cookie/core';
 
 import {FormsModule} from '@angular/forms';
 

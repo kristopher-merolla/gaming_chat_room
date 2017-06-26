@@ -53,15 +53,11 @@ module.exports = {
         })
     },
     show: function(req, res) {
-        console.log("body name:",req.body.name); // look in server
         User.findOne({name: req.body.name}) // name 
         .then((friend)=>{
-            console.log(friend);
-            console.log("hit the THEN");
             res.json({message: "Success", user: friend})
         })
         .catch((err)=>{
-            console.log("hit the Catch");
             res.json({message: "Error", error: err})
         })
     },
@@ -69,12 +65,9 @@ module.exports = {
     show_active: function(req, res) {
         User.find({logStatus: true})
         .then((friend)=>{
-            console.log(friend);
-            console.log("hit the THEN");
             res.json({message: "Success", user: friend})
         })
         .catch((err)=>{
-            console.log("hit the Catch");
             res.json({message: "Error", error: err})
         })
     }

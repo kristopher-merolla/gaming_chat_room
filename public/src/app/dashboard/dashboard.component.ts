@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { HttpService } from './../http.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { CookieService } from 'angular2-cookie/services/cookies.service';
+import { CookieService } from 'angular2-cookie/core';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,7 +12,10 @@ export class DashboardComponent implements OnInit {
 
   @Output() aTaskEventEmitter = new EventEmitter(); // emit from the form up to the parent
 
-  constructor(private _httpService: HttpService, private _router: Router, private _cookieService:CookieService) { }
+  constructor(
+    private _httpService: HttpService,
+    private _router: Router,
+    private _cookieService:CookieService) { }
 
   activeUser = ""; // null as default
 
@@ -25,7 +28,6 @@ export class DashboardComponent implements OnInit {
     // get user id
     this._httpService.getUserId(this.activeUser)
     .then((user)=>{
-      console.log("from logout user, the user is:",user.user);
       // change logStatus of user to FALSE
       this._httpService.logStatusFalse(user.user)
       .then((data)=> {
@@ -45,10 +47,8 @@ export class DashboardComponent implements OnInit {
     }
     else {
       this.activeUser = this._cookieService.get('username');
-      console.log("cookie 22:",this._cookieService.get('username'));
       this._httpService.getUserId(this.activeUser)
       .then((user)=>{
-        console.log("about to run the logStatusTrue function", user.user);
         this._httpService.logStatusTrue(user.user)
         .then((user)=>{
           this.getPlayers();
@@ -56,7 +56,7 @@ export class DashboardComponent implements OnInit {
         .catch()
       })
       .catch((err)=> {
-        console.log("not good",err);
+        console.log(err);
       })
     }
   }
@@ -68,7 +68,6 @@ export class DashboardComponent implements OnInit {
   getPlayers(){
     this._httpService.getPlayers()
     .then((data)=>{
-      console.log("got topics from getTopics",data);
       if(data.message == "Success"){
           this.players = data.user;
       }
