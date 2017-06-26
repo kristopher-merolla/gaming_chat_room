@@ -23,6 +23,26 @@ module.exports = {
             }
         })
     },
+    update_logStatus_false: function(req, res) {
+        User.update({ _id: req.body._id }, { $set: {logStatus: false}}, function(err, output){
+            if (err) {
+                res.json({message: "Error", error: err})
+            }
+            else {
+                res.json({message:"Success", user: output})
+            }
+        })
+    },
+    update_logStatus_true: function(req, res) {
+        User.update({ _id: req.body._id }, { $set: {logStatus: true}}, function(err, output){
+            if (err) {
+                res.json({message: "Error", error: err})
+            }
+            else {
+                res.json({message:"Success", user: output})
+            }
+        })
+    },
     delete: function(req, res) {
         User.remove({ _id: req.body._id })
         .then((data)=>{
@@ -36,6 +56,20 @@ module.exports = {
         console.log("body name:",req.body.name); // look in server
         User.findOne({name: req.body.name}) // name 
         .then((friend)=>{
+            console.log(friend);
+            console.log("hit the THEN");
+            res.json({message: "Success", user: friend})
+        })
+        .catch((err)=>{
+            console.log("hit the Catch");
+            res.json({message: "Error", error: err})
+        })
+    },
+    // pulls ONLY the logStatus: true names
+    show_active: function(req, res) {
+        User.find({logStatus: true})
+        .then((friend)=>{
+            console.log(friend);
             console.log("hit the THEN");
             res.json({message: "Success", user: friend})
         })

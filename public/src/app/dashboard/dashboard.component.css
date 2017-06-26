@@ -1,35 +1,61 @@
 #big_wrapper {
-    border: 2px solid red;
-    padding: 5px;
     border-radius: 5px;
+    width: 1280px;
+    height: 720px;
+    margin: 0px auto;
+    background-color: lightskyblue;
 }
 
 .red {
     color: red;
 }
 
-#newTopicSpace {
-    border: 1px dotted black;
-    padding: 2px;
-    width: 200px;
-}
-
-table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-}
-
-td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-}
-
-tr:nth-child(even) {
-    background-color: #dddddd;
-}
-
 .right {
     text-align: right;
+}
+
+#activeUser {
+    display: inline-block;
+    width: 95%;
+    padding-left: 5px;
+}
+
+#optionBar {
+    display: inline-block;
+    text-align: right;
+}
+
+#rightSpace {
+    display: inline-block;
+    width: 1060px;
+    height: 662px;
+    margin-left: -4px;
+}
+
+#topBar {
+    border-bottom: 2px solid gray;
+}
+
+#onlinePlayers {
+    display: inline-block;
+    vertical-align: top;
+    border-right: 2px solid gray;
+    width: 220px;
+    height: 662px;
+    padding: 5px;
+}
+
+#gameSpace {
+    width: 1052px;
+    height: 462px;
+    padding: 5px;
+}
+
+#chatSpace {
+    background-color: white;
+    border-top: 2px solid gray;
+    width: 1060px;
+    height: 200px;
+    padding: 5px;
+    border-bottom-right-radius: 5px;
 }

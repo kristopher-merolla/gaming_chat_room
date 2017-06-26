@@ -21,7 +21,6 @@ webpackEmptyContext.id = "../../../../../src async recursive";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__dashboard_dashboard_component__ = __webpack_require__("../../../../../src/app/dashboard/dashboard.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__login_login_component__ = __webpack_require__("../../../../../src/app/login/login.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__topic_topic_component__ = __webpack_require__("../../../../../src/app/topic/topic.component.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppRoutingModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -33,12 +32,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-
 var routes = [
     { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
     { path: 'login', component: __WEBPACK_IMPORTED_MODULE_3__login_login_component__["a" /* LoginComponent */] },
     { path: 'dashboard', component: __WEBPACK_IMPORTED_MODULE_2__dashboard_dashboard_component__["a" /* DashboardComponent */] },
-    { path: 'topic/:id', component: __WEBPACK_IMPORTED_MODULE_4__topic_topic_component__["a" /* TopicComponent */] },
     // catch all goes at the bottom!
     { path: '**', redirectTo: '/dashboard' }
 ];
@@ -66,7 +63,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "#big_wrapper {\n    border: 5px solid purple;\n    padding: 15px;\n    margin: 0px auto;\n    border-radius: 10px;\n}", ""]);
+exports.push([module.i, "#big_wrapper {\n    margin: 0px auto;\n    vertical-align: middle;\n    width: auto;\n    min-height: 100vh;\n    background-color: gray;\n}", ""]);
 
 // exports
 
@@ -79,7 +76,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\" id=\"big_wrapper\">\n\n<h1>MEAN Belt Exam - by Kristopher Merolla (6/23/17)</h1>\n\n<!--this is where the components will show up-->\n<router-outlet></router-outlet> \n\n    \n</div>"
+module.exports = "<div id=\"big_wrapper\">\n\n<!--<h1>Gaming Chat Room (MEAN project) - Kris and Eric</h1>-->\n\n<!--this is where the components will show up-->\n<router-outlet></router-outlet> \n\n    \n</div>"
 
 /***/ }),
 
@@ -141,7 +138,6 @@ var _a;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__app_component__ = __webpack_require__("../../../../../src/app/app.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__login_login_component__ = __webpack_require__("../../../../../src/app/login/login.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__dashboard_dashboard_component__ = __webpack_require__("../../../../../src/app/dashboard/dashboard.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__topic_topic_component__ = __webpack_require__("../../../../../src/app/topic/topic.component.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -149,7 +145,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-
 
 
 
@@ -171,7 +166,6 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_7__app_component__["a" /* AppComponent */],
             __WEBPACK_IMPORTED_MODULE_8__login_login_component__["a" /* LoginComponent */],
             __WEBPACK_IMPORTED_MODULE_9__dashboard_dashboard_component__["a" /* DashboardComponent */],
-            __WEBPACK_IMPORTED_MODULE_10__topic_topic_component__["a" /* TopicComponent */],
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -196,7 +190,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "#big_wrapper {\n    border: 2px solid red;\n    padding: 5px;\n    border-radius: 5px;\n}\n\n.red {\n    color: red;\n}\n\n#newTopicSpace {\n    border: 1px dotted black;\n    padding: 2px;\n    width: 200px;\n}\n\ntable {\n    font-family: arial, sans-serif;\n    border-collapse: collapse;\n    width: 100%;\n}\n\ntd, th {\n    border: 1px solid #dddddd;\n    text-align: left;\n    padding: 8px;\n}\n\ntr:nth-child(even) {\n    background-color: #dddddd;\n}\n\n.right {\n    text-align: right;\n}\n", ""]);
+exports.push([module.i, "#big_wrapper {\n    border-radius: 5px;\n    width: 1280px;\n    height: 720px;\n    margin: 0px auto;\n    background-color: lightskyblue;\n}\n\n.red {\n    color: red;\n}\n\n.right {\n    text-align: right;\n}\n\n#activeUser {\n    display: inline-block;\n    width: 95%;\n    padding-left: 5px;\n}\n\n#optionBar {\n    display: inline-block;\n    text-align: right;\n}\n\n#rightSpace {\n    display: inline-block;\n    width: 1060px;\n    height: 662px;\n    margin-left: -4px;\n}\n\n#topBar {\n    border-bottom: 2px solid gray;\n}\n\n#onlinePlayers {\n    display: inline-block;\n    vertical-align: top;\n    border-right: 2px solid gray;\n    width: 220px;\n    height: 662px;\n    padding: 5px;\n}\n\n#gameSpace {\n    width: 1052px;\n    height: 462px;\n    padding: 5px;\n}\n\n#chatSpace {\n    background-color: white;\n    border-top: 2px solid gray;\n    width: 1060px;\n    height: 200px;\n    padding: 5px;\n    border-bottom-right-radius: 5px;\n}", ""]);
 
 // exports
 
@@ -209,7 +203,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/dashboard/dashboard.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"big_wrapper\">\n\n  <h3>Welcome: {{activeUser}}</h3>\n\n  <!--logout button-->\n  <div class=\"right\">\n    <a (click)=\"logoutUser()\">logout</a>\n  </div>\n\n  <h5>Current Polls:</h5>\n\n  <div *ngIf=\"topics\">\n    <!--Check out the topics: {{ topics | json}}-->\n    <table>\n      <tr>\n        <th>Name</th>\n        <th>Survey Question</th>\n        <th>Date Posted</th>\n        <th>Action</th>\n      </tr>\n      <tr *ngFor=\"let topic of topics\">\n        <td>{{topic.user}}</td>\n        <td><a href=\"/topic/{{topic._id}}\">{{topic.title}}</a></td>\n        <td>{{topic.createdAt | date}}</td>\n        <td *ngIf=\"topic.user==activeUser\"><a (click)=\"deleteTopic(topic._id)\">Delete</a></td>\n        <td *ngIf=\"topic.user!=activeUser\"></td>\n      </tr>\n    </table>\n  </div>\n\n  <!--<div *ngIf=\"errors\">\n    Look, errors: {{ errors }}\n  </div>-->\n\n  <br>\n\n  <h5>Create new Poll:</h5>\n\n  <div id=\"newTopicSpace\">\n      <!--simple form with validations:-->\n    <form #topicForm='ngForm' (submit)=\"addTopic(topicForm)\">\n      <label for=\"title\">Question:</label>\n      <input type=\"text\" name=\"title\" required minlength=\"8\" [(ngModel)]=\"topic.title\" #title=\"ngModel\">\n      <br>\n      <label for=\"option_1\">Option 1:</label>\n      <input type=\"text\" name=\"option_1\" required minlength=\"3\" [(ngModel)]=\"topic.option_1\" #option_1=\"ngModel\">\n      <br>\n      <br>\n      <label for=\"option_2\">Option 2:</label>\n      <input type=\"text\" name=\"option_2\" required minlength=\"3\" [(ngModel)]=\"topic.option_2\" #option_2=\"ngModel\">\n      <br>\n      <br>\n      <label for=\"option_3\">Option 3:</label>\n      <input type=\"text\" name=\"option_3\" required minlength=\"3\" [(ngModel)]=\"topic.option_3\" #option_3=\"ngModel\">\n      <br>\n      <br>\n      <label for=\"option_4\">Option 4:</label>\n      <input type=\"text\" name=\"option_4\" required minlength=\"3\" [(ngModel)]=\"topic.option_4\" #option_4=\"ngModel\">\n      <br><br>\n      <button type=\"submit\" [disabled]=\"!topicForm.valid\">Create Poll</button>\n    </form>\n\n    <!--Errors to display if form not filled in right-->\n    <div *ngIf=\"!title.valid && (title.touched || topicForm.submitted)\">\n        <p class=\"red\">Question required, min 8 char</p>\n    </div>\n    <div *ngIf=\"!option_1.valid && (option_1.touched || topicForm.submitted)\">\n        <p class=\"red\">Option 1 required, min 3 char</p>\n    </div>\n    <div *ngIf=\"!option_2.valid && (option_2.touched || topicForm.submitted)\">\n        <p class=\"red\">Option 2 required, min 3 char</p>\n    </div>\n    <div *ngIf=\"!option_3.valid && (option_3.touched || topicForm.submitted)\">\n        <p class=\"red\">Option 3 required, min 3 char</p>\n    </div>\n    <div *ngIf=\"!option_4.valid && (option_4.touched || topicForm.submitted)\">\n        <p class=\"red\">Option 4 required, min 3 char</p>\n    </div>\n\n   <!--{{ topic | json}}-->\n\n  </div>\n\n</div>"
+module.exports = "<div id=\"big_wrapper\">\n\n  <div id=\"topBar\">\n    <h3 id=\"activeUser\">Welcome: {{activeUser}}</h3>\n    <!--logout button-->\n    <div class=\"right\" id=\"optionBar\">\n      <a (click)=\"logoutUser()\">logout</a>\n    </div>\n  </div>\n\n  <div id=\"onlinePlayers\">\n    <h5>Players Online:</h5>\n    <div *ngFor=\"let player of players\">\n      {{player.name}}\n    </div>\n  </div>\n\n  <div id=\"rightSpace\">\n    <div id=\"gameSpace\">Games:</div>\n\n    <div id=\"chatSpace\">Global Chat Space</div>\n  </div>\n\n  \n  \n\n  <!--<h5>Current Polls:</h5>\n\n  <div *ngIf=\"topics\">\n    \n    <table>\n      <tr>\n        <th>Name</th>\n        <th>Survey Question</th>\n        <th>Date Posted</th>\n        <th>Action</th>\n      </tr>\n      <tr *ngFor=\"let topic of topics\">\n        <td>{{topic.user}}</td>\n        <td><a href=\"/topic/{{topic._id}}\">{{topic.title}}</a></td>\n        <td>{{topic.createdAt | date}}</td>\n        <td *ngIf=\"topic.user==activeUser\"><a (click)=\"deleteTopic(topic._id)\">Delete</a></td>\n        <td *ngIf=\"topic.user!=activeUser\"></td>\n      </tr>\n    </table>\n  </div>\n\n  <br>\n\n  <h5>Create new Poll:</h5>\n\n  <div id=\"newTopicSpace\">\n      \n    <form #topicForm='ngForm' (submit)=\"addTopic(topicForm)\">\n      <label for=\"title\">Question:</label>\n      <input type=\"text\" name=\"title\" required minlength=\"8\" [(ngModel)]=\"topic.title\" #title=\"ngModel\">\n      <br>\n      <label for=\"option_1\">Option 1:</label>\n      <input type=\"text\" name=\"option_1\" required minlength=\"3\" [(ngModel)]=\"topic.option_1\" #option_1=\"ngModel\">\n      <br>\n      <br>\n      <label for=\"option_2\">Option 2:</label>\n      <input type=\"text\" name=\"option_2\" required minlength=\"3\" [(ngModel)]=\"topic.option_2\" #option_2=\"ngModel\">\n      <br>\n      <br>\n      <label for=\"option_3\">Option 3:</label>\n      <input type=\"text\" name=\"option_3\" required minlength=\"3\" [(ngModel)]=\"topic.option_3\" #option_3=\"ngModel\">\n      <br>\n      <br>\n      <label for=\"option_4\">Option 4:</label>\n      <input type=\"text\" name=\"option_4\" required minlength=\"3\" [(ngModel)]=\"topic.option_4\" #option_4=\"ngModel\">\n      <br><br>\n      <button type=\"submit\" [disabled]=\"!topicForm.valid\">Create Poll</button>\n    </form>\n\n    <div *ngIf=\"!title.valid && (title.touched || topicForm.submitted)\">\n        <p class=\"red\">Question required, min 8 char</p>\n    </div>\n    <div *ngIf=\"!option_1.valid && (option_1.touched || topicForm.submitted)\">\n        <p class=\"red\">Option 1 required, min 3 char</p>\n    </div>\n    <div *ngIf=\"!option_2.valid && (option_2.touched || topicForm.submitted)\">\n        <p class=\"red\">Option 2 required, min 3 char</p>\n    </div>\n    <div *ngIf=\"!option_3.valid && (option_3.touched || topicForm.submitted)\">\n        <p class=\"red\">Option 3 required, min 3 char</p>\n    </div>\n    <div *ngIf=\"!option_4.valid && (option_4.touched || topicForm.submitted)\">\n        <p class=\"red\">Option 4 required, min 3 char</p>\n    </div>\n\n\n  </div>-->\n\n</div>"
 
 /***/ }),
 
@@ -243,104 +237,61 @@ var DashboardComponent = (function () {
         this._cookieService = _cookieService;
         this.aTaskEventEmitter = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"](); // emit from the form up to the parent
         this.activeUser = ""; // null as default
-        this.topic = {
-            title: "",
-            option_1: "",
-            option_2: "",
-            option_3: "",
-            option_4: ""
-            // user_id: "",
-            // user: ""
-        };
-        this.topic_for_db = {
-            title: "",
-            option_1: ["", 0],
-            option_2: ["", 0],
-            option_3: ["", 0],
-            option_4: ["", 0],
-            user_id: "",
-            user: ""
+        this.user_for_db = {
+            name: "",
+            logStatus: false
         };
         this.errors = null;
-        this.topics = null;
+        this.players = null;
     }
     DashboardComponent.prototype.logoutUser = function () {
-        this.activeUser = "";
-        this._cookieService.removeAll();
-        this._router.navigateByUrl("/login");
-    };
-    DashboardComponent.prototype.addTopic = function (form) {
         var _this = this;
-        console.log("inside dash.comp.ts addTopic function", this.activeUser);
-        this.topic_for_db.user = this.activeUser; // set active user as user in topic_for_db
-        this.topic_for_db.option_1[0] = this.topic.option_1; // set option
-        this.topic_for_db.option_2[0] = this.topic.option_2; // set option
-        this.topic_for_db.option_3[0] = this.topic.option_3; // set option
-        this.topic_for_db.option_4[0] = this.topic.option_4; // set option
-        this.topic_for_db.title = this.topic.title; // set title
-        // step 1 (get user_id of active user)
+        // get user id
         this._httpService.getUserId(this.activeUser)
             .then(function (user) {
-            // THEN - add user_id to this.topic.user_id
-            console.log("look what we have:", user.user._id); // now user.user._id is the id of the active user
-            _this.topic_for_db.user_id = user.user._id; // set user_id for our topic
-            // THEN - create the topic in the database
-            _this._httpService.newTopic(_this.topic_for_db)
+            console.log("from logout user, the user is:", user.user);
+            // change logStatus of user to FALSE
+            _this._httpService.logStatusFalse(user.user)
                 .then(function (data) {
-                console.log("working on the newTopic function in dashboard comp", data);
-                form.resetForm(); // reset the form and "topic" object after the topic was created
-                _this.topic.title = "";
-                _this.topic.option_1 = "";
-                _this.topic.option_2 = "";
-                _this.topic.option_3 = "";
-                _this.topic.option_4 = "";
-                _this.topic_for_db.title = "";
-                _this.topic_for_db.option_1 = ["", 0];
-                _this.topic_for_db.option_2 = ["", 0];
-                _this.topic_for_db.option_3 = ["", 0];
-                _this.topic_for_db.option_4 = ["", 0];
-                _this.topic_for_db.title = "";
-                _this.topic_for_db.title = "";
-                _this.getTopics();
+                // reset active user and remove cookie, reroute to login page
+                _this.activeUser = "";
+                _this._cookieService.removeAll();
+                _this._router.navigateByUrl("/login");
             })
                 .catch();
         })
             .catch();
     };
     DashboardComponent.prototype.ngOnInit = function () {
+        var _this = this;
         if (!this._cookieService.get('username')) {
             this._router.navigateByUrl("/login");
         }
         else {
-            this.getTopics();
             this.activeUser = this._cookieService.get('username');
-            console.log("cookie:", this._cookieService.get('username'));
+            console.log("cookie 22:", this._cookieService.get('username'));
+            this._httpService.getUserId(this.activeUser)
+                .then(function (user) {
+                console.log("about to run the logStatusTrue function", user.user);
+                _this._httpService.logStatusTrue(user.user)
+                    .then(function (user) {
+                    _this.getPlayers();
+                })
+                    .catch();
+            })
+                .catch(function (err) {
+                console.log("not good", err);
+            });
         }
     };
-    // define a function to get all comments (to display on dashboard)
-    DashboardComponent.prototype.getTopics = function () {
+    // define a function to get all active players
+    DashboardComponent.prototype.getPlayers = function () {
         var _this = this;
-        this._httpService.getTopics()
+        this._httpService.getPlayers()
             .then(function (data) {
             console.log("got topics from getTopics", data);
             if (data.message == "Success") {
-                _this.topics = data.topics;
-            }
-            else {
-                _this.errors = "There was a problem fetching the topics from the DB";
-            }
-        })
-            .catch(function (err) {
-            console.log("error doing getTopics:", err);
-        });
-    };
-    DashboardComponent.prototype.deleteTopic = function (topicId) {
-        var _this = this;
-        console.log("inside delete topic");
-        this._httpService.deleteTopic(topicId)
-            .then(function (data) {
-            if (data.message == "Success") {
-                _this.getTopics();
+                _this.players = data.user;
             }
             else {
                 _this.errors = "There was a problem fetching the topics from the DB";
@@ -362,7 +313,7 @@ DashboardComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/dashboard/dashboard.component.html"),
         styles: [__webpack_require__("../../../../../src/app/dashboard/dashboard.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__http_service__["a" /* HttpService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__http_service__["a" /* HttpService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3_angular2_cookie_services_cookies_service__["CookieService"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_angular2_cookie_services_cookies_service__["CookieService"]) === "function" && _c || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__http_service__["a" /* HttpService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__http_service__["a" /* HttpService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3_angular2_cookie_services_cookies_service__["CookieService"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_angular2_cookie_services_cookies_service__["CookieService"]) === "function" && _c || Object])
 ], DashboardComponent);
 
 var _a, _b, _c;
@@ -395,9 +346,9 @@ var HttpService = (function () {
     function HttpService(_http) {
         this._http = _http;
     }
-    // get all the topics from the database, deliver a promise back
-    HttpService.prototype.getTopics = function () {
-        return this._http.get("/topics").map(function (response) { return response.json(); }).toPromise();
+    // get all the active players from the database, deliver a promise back
+    HttpService.prototype.getPlayers = function () {
+        return this._http.get("/players").map(function (response) { return response.json(); }).toPromise();
     };
     // check if an existig user is already created in the DB
     HttpService.prototype.checkUser = function (user) {
@@ -416,44 +367,15 @@ var HttpService = (function () {
         console.log("inside HTTP.service.ts getUserId function", activeUser);
         return this._http.post('/getUserId', activeUser).map(function (data) { return data.json(); }).toPromise();
     };
-    HttpService.prototype.newTopic = function (topic) {
-        console.log("inside HTTP.service.ts newTOPIC", topic);
-        return this._http.post('/newTopic', topic).map(function (data) { return data.json(); }).toPromise();
+    // for user logout to change logStatus to FALSE
+    HttpService.prototype.logStatusFalse = function (user) {
+        console.log("logStatusFalse logout httpservce9");
+        return this._http.post('/logStatusFalse', user).map(function (data) { return data.json(); }).toPromise();
     };
-    HttpService.prototype.vote1 = function (topicId) {
-        var topId = {
-            id: topicId
-        };
-        console.log("inside HTTP service vote()", topId);
-        return this._http.post('/vote1', topId).map(function (data) { return data.json(); }).toPromise();
-    };
-    HttpService.prototype.vote2 = function (topicId) {
-        var topId = {
-            id: topicId
-        };
-        console.log("inside HTTP service vote()", topId);
-        return this._http.post('/vote2', topId).map(function (data) { return data.json(); }).toPromise();
-    };
-    HttpService.prototype.vote3 = function (topicId) {
-        var topId = {
-            id: topicId
-        };
-        console.log("inside HTTP service vote()", topId);
-        return this._http.post('/vote3', topId).map(function (data) { return data.json(); }).toPromise();
-    };
-    HttpService.prototype.vote4 = function (topicId) {
-        var topId = {
-            id: topicId
-        };
-        console.log("inside HTTP service vote()", topId);
-        return this._http.post('/vote4', topId).map(function (data) { return data.json(); }).toPromise();
-    };
-    HttpService.prototype.deleteTopic = function (topicId) {
-        var topId = {
-            id: topicId
-        };
-        console.log("inside http", topId);
-        return this._http.post('/delete', topId).map(function (data) { return data.json(); }).toPromise();
+    // for user login to change logStatus to TRUE
+    HttpService.prototype.logStatusTrue = function (user) {
+        console.log("logStatusTrue httpservice");
+        return this._http.post('/logStatusTrue', user).map(function (data) { return data.json(); }).toPromise();
     };
     return HttpService;
 }());
@@ -475,7 +397,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".red {\n    color: red;\n}\n\n#big_wrapper {\n    border: 1px solid green;\n    padding: 10px;\n    border-radius: 5px;\n}", ""]);
+exports.push([module.i, ".red {\n    color: whitesmoke;\n}\n\n#big_wrapper {\n    border: 1px solid black;\n    padding: 10px;\n    margin: 0px auto;\n    border-radius: 5px;\n    text-align: center;\n    width: auto;\n    height: 100vh;\n    background-color: lightskyblue;\n}", ""]);
 
 // exports
 
@@ -488,7 +410,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/login/login.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"big_wrapper\">\n\n  <h3>Login Component</h3>\n\n  <!--simple form with validations:-->\n  <form #loginForm='ngForm' (submit)=\"login(loginForm)\">\n    <label for=\"username\">Username:</label>\n    <input type=\"text\" name=\"username\" required minlength=\"4\" maxlength=\"24\" [(ngModel)]=\"user.name\" #name=\"ngModel\">\n    <button type=\"submit\" [disabled]=\"!loginForm.valid\">Login</button>\n  </form>\n\n  <div *ngIf=\"!name.valid && (name.touched || loginForm.submitted)\">\n      <p class=\"red\">Name required, min 4 char, max 24 char</p>\n  </div>\n\n</div>"
+module.exports = "<div id=\"big_wrapper\">\n\n  <h3>Welcome!</h3>\n  <br>\n  <h5>Please login below</h5>\n\n  <!--simple form with validations:-->\n  <form #loginForm='ngForm' (submit)=\"login(loginForm)\">\n    <label for=\"username\">Username:</label>\n    <input type=\"text\" name=\"username\" required minlength=\"4\" maxlength=\"24\" [(ngModel)]=\"user.name\" #name=\"ngModel\">\n    <button type=\"submit\" [disabled]=\"!loginForm.valid\">Login</button>\n  </form>\n\n  <div *ngIf=\"!name.valid && (name.touched || loginForm.submitted)\">\n      <p class=\"red\">Name required, min 4 char, max 24 char</p>\n  </div>\n\n</div>"
 
 /***/ }),
 
@@ -568,166 +490,11 @@ LoginComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/login/login.component.html"),
         styles: [__webpack_require__("../../../../../src/app/login/login.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__http_service__["a" /* HttpService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__http_service__["a" /* HttpService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3_angular2_cookie_services_cookies_service__["CookieService"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_angular2_cookie_services_cookies_service__["CookieService"]) === "function" && _c || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__http_service__["a" /* HttpService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__http_service__["a" /* HttpService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3_angular2_cookie_services_cookies_service__["CookieService"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_angular2_cookie_services_cookies_service__["CookieService"]) === "function" && _c || Object])
 ], LoginComponent);
 
 var _a, _b, _c;
 //# sourceMappingURL=login.component.js.map
-
-/***/ }),
-
-/***/ "../../../../../src/app/topic/topic.component.css":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
-// imports
-
-
-// module
-exports.push([module.i, "#big_wrapper {\n    border: 1px solid green;\n    border-radius: 5px;\n    padding: 5px;\n}\n\n.right {\n    text-align: right;\n}\n\ntable {\n    font-family: arial, sans-serif;\n    border-collapse: collapse;\n    width: 100%;\n}\n\ntd, th {\n    border: 1px solid #dddddd;\n    text-align: left;\n    padding: 8px;\n}\n\ntr:nth-child(even) {\n    background-color: #dddddd;\n}\n\n#vote_box {\n    width: 400px;\n}", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ "../../../../../src/app/topic/topic.component.html":
-/***/ (function(module, exports) {
-
-module.exports = "<div id=\"big_wrapper\">\n  <div class=\"right\">\n    <a href=\"/dashboard\">Go to Polls</a>\n  </div>\n\n  <!--{{topic_id}}\n  <br><br>\n  {{topics | json}}-->\n\n  <div *ngFor=\"let topic of topics\">\n    <h1 *ngIf=\"topic_id==topic._id\">{{topic.title}}</h1>\n    <h5 *ngIf=\"topic_id==topic._id\">Click the Vote button to choose one.</h5>\n    <br>\n    <div *ngIf=\"topic_id==topic._id\">\n      <table id=\"vote_box\">\n        <tr>\n          <th>Option</th>\n          <th>Current Count of Votes</th>\n          <th>Action</th>\n        </tr>\n        <tr>\n          <td>{{topic.option_1[0]}}</td>\n          <td>{{topic.option_1[1]}}</td>\n          <td><button (click)=\"vote(1,topic_id)\">Vote</button></td>\n        </tr>\n        <tr>\n          <td>{{topic.option_2[0]}}</td>\n          <td>{{topic.option_2[1]}}</td>\n          <td><button (click)=\"vote(2,topic_id)\">Vote</button></td>\n        </tr>\n        <tr>\n          <td>{{topic.option_3[0]}}</td>\n          <td>{{topic.option_3[1]}}</td>\n          <td><button (click)=\"vote(3,topic_id)\">Vote</button></td>\n        </tr>\n        <tr>\n          <td>{{topic.option_4[0]}}</td>\n          <td>{{topic.option_4[1]}}</td>\n          <td><button (click)=\"vote(4,topic_id)\">Vote</button></td>\n        </tr>\n      </table>\n    </div>\n  </div>\n\n</div>"
-
-/***/ }),
-
-/***/ "../../../../../src/app/topic/topic.component.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__http_service__ = __webpack_require__("../../../../../src/app/http.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angular2_cookie_services_cookies_service__ = __webpack_require__("../../../../angular2-cookie/services/cookies.service.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angular2_cookie_services_cookies_service___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_angular2_cookie_services_cookies_service__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TopicComponent; });
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-
-
-
-
-var TopicComponent = (function () {
-    function TopicComponent(_httpService, route, _router, _cookieService) {
-        this._httpService = _httpService;
-        this.route = route;
-        this._router = _router;
-        this._cookieService = _cookieService;
-        this.activeUser = ""; // null as default
-        this.topic_id = ""; // topic id for this page! (comes from param in router link)
-        this.errors = null;
-        this.topics = null;
-    }
-    TopicComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        if (!this._cookieService.get('username')) {
-            this._router.navigateByUrl("/login");
-        }
-        else {
-            this.sub = this.route.params.subscribe(function (params) {
-                _this.topic_id = params['id']; // set topic_id to the params[id]
-            });
-            this.getTopics();
-            this.activeUser = this._cookieService.get('username');
-            console.log("cookie:", this._cookieService.get('username'));
-        }
-    };
-    // define a function to get all comments (to display on dashboard)
-    TopicComponent.prototype.getTopics = function () {
-        var _this = this;
-        this._httpService.getTopics()
-            .then(function (data) {
-            console.log("got topics from getTopics", data);
-            if (data.message == "Success") {
-                _this.topics = data.topics;
-            }
-            else {
-                _this.errors = "There was a problem fetching the topics from the DB";
-            }
-        })
-            .catch(function (err) {
-            console.log("error doing getTopics:", err);
-        });
-    };
-    TopicComponent.prototype.vote = function (optNum, topicId) {
-        var _this = this;
-        console.log(optNum);
-        console.log(topicId);
-        if (optNum == 1) {
-            console.log("option 1 hit");
-            this._httpService.vote1(topicId)
-                .then(function (data) {
-                console.log("came back from HTTP successfully vote1");
-                _this.getTopics();
-            })
-                .catch(function (err) {
-                console.log("error doing getTopics:", err);
-            });
-        }
-        else if (optNum == 2) {
-            this._httpService.vote2(topicId)
-                .then(function (data) {
-                console.log("came back from HTTP successfully vote2");
-                _this.getTopics();
-            })
-                .catch(function (err) {
-                console.log("error doing getTopics:", err);
-            });
-        }
-        else if (optNum == 3) {
-            this._httpService.vote3(topicId)
-                .then(function (data) {
-                console.log("came back from HTTP successfully vote3");
-                _this.getTopics();
-            })
-                .catch(function (err) {
-                console.log("error doing getTopics:", err);
-            });
-        }
-        else if (optNum == 4) {
-            this._httpService.vote4(topicId)
-                .then(function (data) {
-                console.log("came back from HTTP successfully vote4");
-                _this.getTopics();
-            })
-                .catch(function (err) {
-                console.log("error doing getTopics:", err);
-            });
-        }
-        else {
-            console.log("error somewhere in option select");
-        }
-    };
-    return TopicComponent;
-}());
-TopicComponent = __decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
-        selector: 'app-topic',
-        template: __webpack_require__("../../../../../src/app/topic/topic.component.html"),
-        styles: [__webpack_require__("../../../../../src/app/topic/topic.component.css")]
-    }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__http_service__["a" /* HttpService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__http_service__["a" /* HttpService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* ActivatedRoute */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* ActivatedRoute */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["c" /* Router */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3_angular2_cookie_services_cookies_service__["CookieService"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_angular2_cookie_services_cookies_service__["CookieService"]) === "function" && _d || Object])
-], TopicComponent);
-
-var _a, _b, _c, _d;
-//# sourceMappingURL=topic.component.js.map
 
 /***/ }),
 
