@@ -4,11 +4,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent },
+  { path: '', component: LoginComponent },
   { path: 'dashboard', component: DashboardComponent },
-  // catch all goes at the bottom!
-  { path: '**', redirectTo: '/dashboard' }
+  { path: '**', redirectTo: '/' }
 ];
 
 @NgModule({

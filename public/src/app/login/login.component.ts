@@ -20,16 +20,12 @@ export class LoginComponent implements OnInit {
   }
 
   login(form) {
-    console.log("login function hit");
-
     // function to check user exists
     this._httpService.checkUser(this.user)
       .then( user => {
         if(user.user != null) {
           // have user in db, update cookie, then redirect
-          console.log("user found in DB", user.user.name);
           this._cookieService.put('username', user.user.name);
-          console.log("cookie:", this._cookieService.get('username'));
           form.resetForm();
           this._router.navigateByUrl("/dashboard");
         }
@@ -37,9 +33,7 @@ export class LoginComponent implements OnInit {
           // dont have user, need to create, update cookie
           this._httpService.createUser(this.user)
             .then( user => {
-              console.log("createnew User", user.user.name);
               this._cookieService.put('username', user.user.name);
-              console.log("cookie:", this._cookieService.get('username'));
               form.resetForm();
               this._router.navigateByUrl("/dashboard");
             })

@@ -1,7 +1,8 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { HttpService } from './../http.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CookieService } from 'angular2-cookie/core';
+import { ChatService } from './../chat/chat.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,13 +10,16 @@ import { CookieService } from 'angular2-cookie/core';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-
+  messages = [];
+  connection;
+  message;
   @Output() aTaskEventEmitter = new EventEmitter(); // emit from the form up to the parent
 
   constructor(
     private _httpService: HttpService,
     private _router: Router,
-    private _cookieService:CookieService) { }
+    private _cookieService:CookieService,
+    private _chatService: ChatService) { }
 
   activeUser = ""; // null as default
 
@@ -23,6 +27,11 @@ export class DashboardComponent implements OnInit {
     name: "",
     logStatus: false
   }
+
+  // sendMessage(){
+  //   this._chatService.sendMessage(this.message);
+  //   this.message = '';
+  // }
 
   logoutUser() {
     // get user id
@@ -46,6 +55,10 @@ export class DashboardComponent implements OnInit {
       this._router.navigateByUrl("/login");
     }
     else {
+      // Initialize socket connection
+      this.connection = this._chatService.getMessages().subscribe(message => {
+        console.log(message)
+      })
       this.activeUser = this._cookieService.get('username');
       this._httpService.getUserId(this.activeUser)
       .then((user)=>{
@@ -78,6 +91,10 @@ export class DashboardComponent implements OnInit {
     .catch((err)=>{
       console.log("error doing getTopics:",err)
     })
+  }
+
+  ngOnDestroy(){
+    this.connection.unsubscribe();
   }
 
 }
