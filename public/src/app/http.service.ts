@@ -28,21 +28,25 @@ export class HttpService {
     var activeUser = {
       name: user
     }
-    console.log("inside HTTP.service.ts getUserId function", activeUser);
     return this._http.post('/getUserId', activeUser).map((data)=>data.json()).toPromise();
   }
 
   // for user logout to change logStatus to FALSE
   logStatusFalse(user) {
-    console.log("logStatusFalse logout httpservce9")
     return this._http.post('/logStatusFalse', user).map((data)=>data.json()).toPromise();
   }
 
   // for user login to change logStatus to TRUE
   logStatusTrue(user) {
-    console.log("logStatusTrue httpservice")
     return this._http.post('/logStatusTrue', user).map((data)=>data.json()).toPromise();
   }
 
+  createMessage(message) {
+    return this._http.post('/message', message).map((data)=>data.json()).toPromise();
+  }
+
+  getMessage() {
+    return this._http.get('/messages').map((data)=>data.json()).toPromise();
+  }
 
 }

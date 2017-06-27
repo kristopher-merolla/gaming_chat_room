@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import {HttpModule} from '@angular/http';
 import {HttpService} from './http.service';
 
-import { CookieService } from 'angular2-cookie/services/cookies.service';
+import { CookieService } from 'angular2-cookie/core';
 
 import {FormsModule} from '@angular/forms';
 
@@ -12,6 +12,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ChatComponent } from './chat/chat.component';
+
+import { ChatService } from './chat/chat.service';
 import { GameComponent } from './game/game.component';
 
 @NgModule({
@@ -19,6 +22,7 @@ import { GameComponent } from './game/game.component';
     AppComponent,
     LoginComponent,
     DashboardComponent,
+    ChatComponent,
     GameComponent,
   ],
   imports: [
@@ -27,7 +31,7 @@ import { GameComponent } from './game/game.component';
     HttpModule,
     FormsModule,
   ],
-  providers: [HttpService, CookieService],
+  providers: [HttpService, CookieService, ChatService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

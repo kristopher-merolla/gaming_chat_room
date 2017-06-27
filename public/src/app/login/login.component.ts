@@ -13,23 +13,27 @@ export class LoginComponent implements OnInit {
   @Output()
   aTaskEventEmitter = new EventEmitter(); // emit from the form up to the parent
 
-  constructor(private _httpService: HttpService, private _router: Router, private _cookieService:CookieService) { }
+  constructor(
+    private _httpService: HttpService,
+    private _router: Router,
+    private _cookieService:CookieService
+  ) {
+    if(this._cookieService.get('username')){
+      this._router.navigate(['dashboard']);
+    }
+  }
 
   user = {
     name: ""
   }
 
   login(form) {
-    console.log("login function hit");
-
     // function to check user exists
     this._httpService.checkUser(this.user)
       .then( user => {
         if(user.user != null) {
           // have user in db, update cookie, then redirect
-          console.log("user found in DB", user.user.name);
           this._cookieService.put('username', user.user.name);
-          console.log("cookie:", this._cookieService.get('username'));
           form.resetForm();
           this._router.navigateByUrl("/dashboard");
         }
@@ -37,9 +41,7 @@ export class LoginComponent implements OnInit {
           // dont have user, need to create, update cookie
           this._httpService.createUser(this.user)
             .then( user => {
-              console.log("createnew User", user.user.name);
               this._cookieService.put('username', user.user.name);
-              console.log("cookie:", this._cookieService.get('username'));
               form.resetForm();
               this._router.navigateByUrl("/dashboard");
             })

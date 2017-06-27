@@ -1,7 +1,8 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { HttpService } from './../http.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { CookieService } from 'angular2-cookie/services/cookies.service';
+import { CookieService } from 'angular2-cookie/core';
+import { ChatService } from './../chat/chat.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,10 +10,26 @@ import { CookieService } from 'angular2-cookie/services/cookies.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-
+  messages = [];
+  connection;
+  message_obj = {
+    message: '',
+    name: '',
+  }
   @Output() aTaskEventEmitter = new EventEmitter(); // emit from the form up to the parent
 
-  constructor(private _httpService: HttpService, private _router: Router, private _cookieService:CookieService) { }
+  constructor(
+    private _httpService: HttpService,
+    private _router: Router,
+    private _cookieService:CookieService,
+    private _chatService: ChatService
+  ){
+    this._httpService.getMessage()
+    .then(obj=>{
+      this.messages = obj.reverse();
+    })
+    .catch(err=>{console.log(err);})
+  }
 
   // local (component) variables 
   game_profile = false; // false as default
@@ -23,11 +40,29 @@ export class DashboardComponent implements OnInit {
     logStatus: false
   }
 
+  // sendMessage(){
+  //   this._chatService.sendMessage(this.message);
+  //   this.message = '';
+  // }
+
+  onSubmit(form){
+    this.message_obj.name = this._cookieService.get('username');
+    this._httpService.createMessage(this.message_obj)
+    .then(obj=>{
+      form.resetForm();
+      this._httpService.getMessage()
+      .then(data=>{
+        this.messages = data.reverse();
+      })
+      .catch(err=>{console.log(err);})
+    })
+    .catch(err=>{console.log(err);})
+  }
+
   logoutUser() {
     // get user id
     this._httpService.getUserId(this.activeUser)
     .then((user)=>{
-      console.log("from logout user, the user is:",user.user);
       // change logStatus of user to FALSE
       this._httpService.logStatusFalse(user.user)
       .then((data)=> {
@@ -46,12 +81,14 @@ export class DashboardComponent implements OnInit {
       this._router.navigateByUrl("/login");
     }
     else {
+      // Initialize socket connection
+      this.connection = this._chatService.getMessages().subscribe(message => {
+        console.log(message)
+      })
       this.game_profile = false;
       this.activeUser = this._cookieService.get('username');
-      console.log("cookie 22:",this._cookieService.get('username'));
       this._httpService.getUserId(this.activeUser)
       .then((user)=>{
-        console.log("about to run the logStatusTrue function", user.user);
         this._httpService.logStatusTrue(user.user)
         .then((user)=>{
           this.getPlayers();
@@ -59,7 +96,7 @@ export class DashboardComponent implements OnInit {
         .catch()
       })
       .catch((err)=> {
-        console.log("not good",err);
+        console.log(err);
       })
     }
   }
@@ -71,7 +108,6 @@ export class DashboardComponent implements OnInit {
   getPlayers(){
     this._httpService.getPlayers()
     .then((data)=>{
-      console.log("got topics from getTopics",data);
       if(data.message == "Success"){
           this.players = data.user;
       }
@@ -84,6 +120,10 @@ export class DashboardComponent implements OnInit {
     })
   }
 
+
+  ngOnDestroy(){
+    this.connection.unsubscribe();
+  }
   // GAMES
   pong() {
     this.game_profile = true;

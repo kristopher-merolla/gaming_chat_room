@@ -16,6 +16,7 @@
   </div>
 
   <div id="rightSpace">
+
     <!--If we have not yet selected a game profile...-->
     <div *ngIf="!game_profile" id="gameSpace">
       <h1 id="games_title">Games:</h1>
@@ -30,9 +31,22 @@
     </div>
     <!--Global chat space-->
     <div id="chatSpace">
-      <p>Global Chat Space</p>
+      <div id="messageSpace">
+        <div *ngFor='let message of messages'>
+          ({{ message.createdAt | date: 'shortTime' }}) {{ message.name }}: {{ message.message }}
+        </div>
+      </div>
+      <form #msgForm='ngForm' (submit)=onSubmit(msgForm)>
+        <input id="msg_input" type="text" name="message"
+        [(ngModel)]='message_obj.message'
+        #message='ngModel'
+        required>
+        <input id="submitMsg" type="submit" value="Send">
+      </form>
+      <div *ngIf='message.errors && (msgForm.submitted )' class='red'>
+        <li *ngIf='message.errors.required'>Message is required</li>
+      </div>
     </div>
   </div>
-
 
 </div>
