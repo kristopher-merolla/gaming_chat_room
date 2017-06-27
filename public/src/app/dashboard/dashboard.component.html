@@ -4,12 +4,12 @@
     <h3 id="activeUser">Welcome: {{activeUser}}</h3>
     <!--logout button-->
     <div class="right" id="optionBar">
-      <a (click)="logoutUser()">logout</a>
+      <a (click)="logoutUser()" class="btn btn-primary btn-lg active btn-xs" role="button">logout</a>
     </div>
   </div>
 
   <div id="onlinePlayers">
-    <h5>Players Online:</h5>
+    <h5 id="online_header">Look who's online</h5>
     <div *ngFor="let player of players">
       {{player.name}}
     </div>
@@ -19,11 +19,20 @@
     <!--If we have not yet selected a game profile...-->
     <div *ngIf="!game_profile" id="gameSpace">
       <h1 id="games_title">Games:</h1>
-      <a (click)="pong()">Pong</a>
+      <div id="game_selector">
+        <form>
+          <select name="cars">
+            <option value="volvo">Pong</option>
+            <!--<option value="saab">Golf</option>
+            <option value="fiat">Snake</option>-->
+          </select>
+        </form>
+      </div>
     </div>
+    <br>
     <!--If we've selected a game profile, to load a component-->
     <div *ngIf="game_profile" id="gameSpace">
-      <router-outlet></router-outlet> 
+      <router-outlet></router-outlet>
     </div>
     <!--Global chat space-->
     <div id="chatSpace">

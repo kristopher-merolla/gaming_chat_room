@@ -90,4 +90,14 @@ export class DashboardComponent implements OnInit {
     this._router.navigateByUrl("/dashboard/pong");
   }
 
+  golf() {
+    this.game_profile = true;
+    this._router.navigateByUrl("/dashboard/golf");
+  }
+
+  snake() {
+    this.game_profile = true;
+    this._router.navigateByUrl("/dashboard/snake");
+  }
+
 }
