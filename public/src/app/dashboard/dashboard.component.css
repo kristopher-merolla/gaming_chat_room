@@ -1,13 +1,18 @@
 #big_wrapper {
-    border-radius: 5px;
+    border-radius: 10px;
     width: 1280px;
     height: 720px;
     margin: 0px auto;
     background-color: lightskyblue;
+    border-top: 2px solid darkslategray;
 }
 
 .red {
     color: red;
+}
+
+#games_title {
+    text-align: middle;
 }
 
 .right {
@@ -17,7 +22,13 @@
 #activeUser {
     display: inline-block;
     width: 95%;
-    padding-left: 5px;
+    padding-left: 10px;
+    color: darkslategray;
+}
+
+#online_header {
+    color: darkslategray;
+    text-align: center;
 }
 
 #optionBar {
@@ -28,33 +39,39 @@
 #rightSpace {
     display: inline-block;
     width: 1060px;
-    height: 662px;
+    height: 661px;
     margin-left: -4px;
 }
 
 #topBar {
-    border-bottom: 2px solid gray;
+    border-bottom: 2px solid darkslategray;
 }
 
 #onlinePlayers {
     display: inline-block;
     vertical-align: top;
-    border-right: 2px solid gray;
+    border-right: 2px solid darkslategray;
     width: 220px;
     height: 662px;
-    padding: 5px;
+    padding: 10px;
 }
 
 #gameSpace {
     width: 1052px;
-    height: 462px;
-    padding: 5px;
+    height: 461px;
+    padding: 10px;
+    display: inline-block;
+}
+
+#game_selector {
+    display: inline-block;
 }
 
 #chatSpace {
     background-color: white;
-    border-top: 2px solid gray;
+    border-top: 2px solid darkslategray;
     width: 1060px;
+
     height: 200px;
     padding: 5px;
     border-bottom-right-radius: 5px;
@@ -71,4 +88,8 @@
     width: 1060px;
     height: 160px;
     overflow: scroll;
+=======
+    height: 199px;
+    padding: 10px;
+    border-bottom-right-radius: 10px;
 }

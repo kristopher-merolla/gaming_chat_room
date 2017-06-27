@@ -31,6 +31,8 @@ export class DashboardComponent implements OnInit {
     .catch(err=>{console.log(err);})
   }
 
+  // local (component) variables 
+  game_profile = false; // false as default
   activeUser = ""; // null as default
 
   user_for_db = {
@@ -83,6 +85,7 @@ export class DashboardComponent implements OnInit {
       this.connection = this._chatService.getMessages().subscribe(message => {
         console.log(message)
       })
+      this.game_profile = false;
       this.activeUser = this._cookieService.get('username');
       this._httpService.getUserId(this.activeUser)
       .then((user)=>{
@@ -117,8 +120,24 @@ export class DashboardComponent implements OnInit {
     })
   }
 
+
   ngOnDestroy(){
     this.connection.unsubscribe();
+  }
+  // GAMES
+  pong() {
+    this.game_profile = true;
+    this._router.navigateByUrl("/dashboard/pong");
+  }
+
+  golf() {
+    this.game_profile = true;
+    this._router.navigateByUrl("/dashboard/golf");
+  }
+
+  snake() {
+    this.game_profile = true;
+    this._router.navigateByUrl("/dashboard/snake");
   }
 
 }
