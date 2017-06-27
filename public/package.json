@@ -23,6 +23,7 @@
     "@angular/router": "^4.0.0",
     "angular2-cookie": "^1.2.6",
     "core-js": "^2.4.1",
+    "require-ensure": "^1.0.2",
     "rxjs": "^5.1.0",
     "zone.js": "^0.8.4"
   },
