@@ -14,6 +14,8 @@ export class DashboardComponent implements OnInit {
 
   constructor(private _httpService: HttpService, private _router: Router, private _cookieService:CookieService) { }
 
+  // local (component) variables 
+  game_profile = false; // false as default
   activeUser = ""; // null as default
 
   user_for_db = {
@@ -44,6 +46,7 @@ export class DashboardComponent implements OnInit {
       this._router.navigateByUrl("/login");
     }
     else {
+      this.game_profile = false;
       this.activeUser = this._cookieService.get('username');
       console.log("cookie 22:",this._cookieService.get('username'));
       this._httpService.getUserId(this.activeUser)
@@ -79,6 +82,12 @@ export class DashboardComponent implements OnInit {
     .catch((err)=>{
       console.log("error doing getTopics:",err)
     })
+  }
+
+  // GAMES
+  pong() {
+    this.game_profile = true;
+    this._router.navigateByUrl("/dashboard/pong");
   }
 
 }

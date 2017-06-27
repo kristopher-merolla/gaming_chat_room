@@ -16,9 +16,19 @@
   </div>
 
   <div id="rightSpace">
-    <div id="gameSpace">Games:</div>
-
-    <div id="chatSpace">Global Chat Space</div>
+    <!--If we have not yet selected a game profile...-->
+    <div *ngIf="!game_profile" id="gameSpace">
+      <h1 id="games_title">Games:</h1>
+      <a (click)="pong()">Pong</a>
+    </div>
+    <!--If we've selected a game profile, to load a component-->
+    <div *ngIf="game_profile" id="gameSpace">
+      <router-outlet></router-outlet> 
+    </div>
+    <!--Global chat space-->
+    <div id="chatSpace">
+      <p>Global Chat Space</p>
+    </div>
   </div>
 
   

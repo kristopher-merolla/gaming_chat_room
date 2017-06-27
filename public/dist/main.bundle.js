@@ -21,6 +21,7 @@ webpackEmptyContext.id = "../../../../../src async recursive";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__dashboard_dashboard_component__ = __webpack_require__("../../../../../src/app/dashboard/dashboard.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__login_login_component__ = __webpack_require__("../../../../../src/app/login/login.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__game_game_component__ = __webpack_require__("../../../../../src/app/game/game.component.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppRoutingModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -32,10 +33,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
 var routes = [
     { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
     { path: 'login', component: __WEBPACK_IMPORTED_MODULE_3__login_login_component__["a" /* LoginComponent */] },
-    { path: 'dashboard', component: __WEBPACK_IMPORTED_MODULE_2__dashboard_dashboard_component__["a" /* DashboardComponent */] },
+    { path: 'dashboard', component: __WEBPACK_IMPORTED_MODULE_2__dashboard_dashboard_component__["a" /* DashboardComponent */], children: [
+            { path: 'pong', component: __WEBPACK_IMPORTED_MODULE_4__game_game_component__["a" /* GameComponent */] }
+        ] },
+    // { path: 'dashboard/pong', component: GameComponent },
     // catch all goes at the bottom!
     { path: '**', redirectTo: '/dashboard' }
 ];
@@ -76,7 +81,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"big_wrapper\">\n\n<!--<h1>Gaming Chat Room (MEAN project) - Kris and Eric</h1>-->\n\n<!--this is where the components will show up-->\n<router-outlet></router-outlet> \n\n    \n</div>"
+module.exports = "<div id=\"big_wrapper\">\n\n\n<router-outlet></router-outlet> \n\n    \n</div>"
 
 /***/ }),
 
@@ -138,6 +143,7 @@ var _a;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__app_component__ = __webpack_require__("../../../../../src/app/app.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__login_login_component__ = __webpack_require__("../../../../../src/app/login/login.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__dashboard_dashboard_component__ = __webpack_require__("../../../../../src/app/dashboard/dashboard.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__game_game_component__ = __webpack_require__("../../../../../src/app/game/game.component.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -145,6 +151,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -166,6 +173,7 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_7__app_component__["a" /* AppComponent */],
             __WEBPACK_IMPORTED_MODULE_8__login_login_component__["a" /* LoginComponent */],
             __WEBPACK_IMPORTED_MODULE_9__dashboard_dashboard_component__["a" /* DashboardComponent */],
+            __WEBPACK_IMPORTED_MODULE_10__game_game_component__["a" /* GameComponent */],
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -190,7 +198,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "#big_wrapper {\n    border-radius: 5px;\n    width: 1280px;\n    height: 720px;\n    margin: 0px auto;\n    background-color: lightskyblue;\n}\n\n.red {\n    color: red;\n}\n\n.right {\n    text-align: right;\n}\n\n#activeUser {\n    display: inline-block;\n    width: 95%;\n    padding-left: 5px;\n}\n\n#optionBar {\n    display: inline-block;\n    text-align: right;\n}\n\n#rightSpace {\n    display: inline-block;\n    width: 1060px;\n    height: 662px;\n    margin-left: -4px;\n}\n\n#topBar {\n    border-bottom: 2px solid gray;\n}\n\n#onlinePlayers {\n    display: inline-block;\n    vertical-align: top;\n    border-right: 2px solid gray;\n    width: 220px;\n    height: 662px;\n    padding: 5px;\n}\n\n#gameSpace {\n    width: 1052px;\n    height: 462px;\n    padding: 5px;\n}\n\n#chatSpace {\n    background-color: white;\n    border-top: 2px solid gray;\n    width: 1060px;\n    height: 200px;\n    padding: 5px;\n    border-bottom-right-radius: 5px;\n}", ""]);
+exports.push([module.i, "#big_wrapper {\n    border-radius: 5px;\n    width: 1280px;\n    height: 720px;\n    margin: 0px auto;\n    background-color: lightskyblue;\n    border-top: 2px solid gray;\n}\n\n.red {\n    color: red;\n}\n\ngames_title {\n    text-align: middle;\n}\n\n.right {\n    text-align: right;\n}\n\n#activeUser {\n    display: inline-block;\n    width: 95%;\n    padding-left: 5px;\n}\n\n#optionBar {\n    display: inline-block;\n    text-align: right;\n}\n\n#rightSpace {\n    display: inline-block;\n    width: 1060px;\n    height: 662px;\n    margin-left: -4px;\n}\n\n#topBar {\n    border-bottom: 2px solid gray;\n}\n\n#onlinePlayers {\n    display: inline-block;\n    vertical-align: top;\n    border-right: 2px solid gray;\n    width: 220px;\n    height: 662px;\n    padding: 5px;\n}\n\n#gameSpace {\n    width: 1052px;\n    height: 462px;\n    padding: 5px;\n}\n\n#chatSpace {\n    background-color: white;\n    border-top: 2px solid gray;\n    width: 1060px;\n    height: 199px;\n    padding: 5px;\n    border-bottom-right-radius: 5px;\n}", ""]);
 
 // exports
 
@@ -203,7 +211,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/dashboard/dashboard.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"big_wrapper\">\n\n  <div id=\"topBar\">\n    <h3 id=\"activeUser\">Welcome: {{activeUser}}</h3>\n    <!--logout button-->\n    <div class=\"right\" id=\"optionBar\">\n      <a (click)=\"logoutUser()\">logout</a>\n    </div>\n  </div>\n\n  <div id=\"onlinePlayers\">\n    <h5>Players Online:</h5>\n    <div *ngFor=\"let player of players\">\n      {{player.name}}\n    </div>\n  </div>\n\n  <div id=\"rightSpace\">\n    <div id=\"gameSpace\">Games:</div>\n\n    <div id=\"chatSpace\">Global Chat Space</div>\n  </div>\n\n  \n  \n\n  <!--<h5>Current Polls:</h5>\n\n  <div *ngIf=\"topics\">\n    \n    <table>\n      <tr>\n        <th>Name</th>\n        <th>Survey Question</th>\n        <th>Date Posted</th>\n        <th>Action</th>\n      </tr>\n      <tr *ngFor=\"let topic of topics\">\n        <td>{{topic.user}}</td>\n        <td><a href=\"/topic/{{topic._id}}\">{{topic.title}}</a></td>\n        <td>{{topic.createdAt | date}}</td>\n        <td *ngIf=\"topic.user==activeUser\"><a (click)=\"deleteTopic(topic._id)\">Delete</a></td>\n        <td *ngIf=\"topic.user!=activeUser\"></td>\n      </tr>\n    </table>\n  </div>\n\n  <br>\n\n  <h5>Create new Poll:</h5>\n\n  <div id=\"newTopicSpace\">\n      \n    <form #topicForm='ngForm' (submit)=\"addTopic(topicForm)\">\n      <label for=\"title\">Question:</label>\n      <input type=\"text\" name=\"title\" required minlength=\"8\" [(ngModel)]=\"topic.title\" #title=\"ngModel\">\n      <br>\n      <label for=\"option_1\">Option 1:</label>\n      <input type=\"text\" name=\"option_1\" required minlength=\"3\" [(ngModel)]=\"topic.option_1\" #option_1=\"ngModel\">\n      <br>\n      <br>\n      <label for=\"option_2\">Option 2:</label>\n      <input type=\"text\" name=\"option_2\" required minlength=\"3\" [(ngModel)]=\"topic.option_2\" #option_2=\"ngModel\">\n      <br>\n      <br>\n      <label for=\"option_3\">Option 3:</label>\n      <input type=\"text\" name=\"option_3\" required minlength=\"3\" [(ngModel)]=\"topic.option_3\" #option_3=\"ngModel\">\n      <br>\n      <br>\n      <label for=\"option_4\">Option 4:</label>\n      <input type=\"text\" name=\"option_4\" required minlength=\"3\" [(ngModel)]=\"topic.option_4\" #option_4=\"ngModel\">\n      <br><br>\n      <button type=\"submit\" [disabled]=\"!topicForm.valid\">Create Poll</button>\n    </form>\n\n    <div *ngIf=\"!title.valid && (title.touched || topicForm.submitted)\">\n        <p class=\"red\">Question required, min 8 char</p>\n    </div>\n    <div *ngIf=\"!option_1.valid && (option_1.touched || topicForm.submitted)\">\n        <p class=\"red\">Option 1 required, min 3 char</p>\n    </div>\n    <div *ngIf=\"!option_2.valid && (option_2.touched || topicForm.submitted)\">\n        <p class=\"red\">Option 2 required, min 3 char</p>\n    </div>\n    <div *ngIf=\"!option_3.valid && (option_3.touched || topicForm.submitted)\">\n        <p class=\"red\">Option 3 required, min 3 char</p>\n    </div>\n    <div *ngIf=\"!option_4.valid && (option_4.touched || topicForm.submitted)\">\n        <p class=\"red\">Option 4 required, min 3 char</p>\n    </div>\n\n\n  </div>-->\n\n</div>"
+module.exports = "<div id=\"big_wrapper\">\n\n  <div id=\"topBar\">\n    <h3 id=\"activeUser\">Welcome: {{activeUser}}</h3>\n    <!--logout button-->\n    <div class=\"right\" id=\"optionBar\">\n      <a (click)=\"logoutUser()\">logout</a>\n    </div>\n  </div>\n\n  <div id=\"onlinePlayers\">\n    <h5>Players Online:</h5>\n    <div *ngFor=\"let player of players\">\n      {{player.name}}\n    </div>\n  </div>\n\n  <div id=\"rightSpace\">\n    <!--If we have not yet selected a game profile...-->\n    <div *ngIf=\"!game_profile\" id=\"gameSpace\">\n      <h1 id=\"games_title\">Games:</h1>\n      <a (click)=\"pong()\">Pong</a>\n    </div>\n    <!--If we've selected a game profile, to load a component-->\n    <div *ngIf=\"game_profile\" id=\"gameSpace\">\n      <router-outlet></router-outlet> \n    </div>\n    <!--Global chat space-->\n    <div id=\"chatSpace\">\n      <p>Global Chat Space</p>\n    </div>\n  </div>\n\n  \n  \n\n  <!--<h5>Current Polls:</h5>\n\n  <div *ngIf=\"topics\">\n    \n    <table>\n      <tr>\n        <th>Name</th>\n        <th>Survey Question</th>\n        <th>Date Posted</th>\n        <th>Action</th>\n      </tr>\n      <tr *ngFor=\"let topic of topics\">\n        <td>{{topic.user}}</td>\n        <td><a href=\"/topic/{{topic._id}}\">{{topic.title}}</a></td>\n        <td>{{topic.createdAt | date}}</td>\n        <td *ngIf=\"topic.user==activeUser\"><a (click)=\"deleteTopic(topic._id)\">Delete</a></td>\n        <td *ngIf=\"topic.user!=activeUser\"></td>\n      </tr>\n    </table>\n  </div>\n\n  <br>\n\n  <h5>Create new Poll:</h5>\n\n  <div id=\"newTopicSpace\">\n      \n    <form #topicForm='ngForm' (submit)=\"addTopic(topicForm)\">\n      <label for=\"title\">Question:</label>\n      <input type=\"text\" name=\"title\" required minlength=\"8\" [(ngModel)]=\"topic.title\" #title=\"ngModel\">\n      <br>\n      <label for=\"option_1\">Option 1:</label>\n      <input type=\"text\" name=\"option_1\" required minlength=\"3\" [(ngModel)]=\"topic.option_1\" #option_1=\"ngModel\">\n      <br>\n      <br>\n      <label for=\"option_2\">Option 2:</label>\n      <input type=\"text\" name=\"option_2\" required minlength=\"3\" [(ngModel)]=\"topic.option_2\" #option_2=\"ngModel\">\n      <br>\n      <br>\n      <label for=\"option_3\">Option 3:</label>\n      <input type=\"text\" name=\"option_3\" required minlength=\"3\" [(ngModel)]=\"topic.option_3\" #option_3=\"ngModel\">\n      <br>\n      <br>\n      <label for=\"option_4\">Option 4:</label>\n      <input type=\"text\" name=\"option_4\" required minlength=\"3\" [(ngModel)]=\"topic.option_4\" #option_4=\"ngModel\">\n      <br><br>\n      <button type=\"submit\" [disabled]=\"!topicForm.valid\">Create Poll</button>\n    </form>\n\n    <div *ngIf=\"!title.valid && (title.touched || topicForm.submitted)\">\n        <p class=\"red\">Question required, min 8 char</p>\n    </div>\n    <div *ngIf=\"!option_1.valid && (option_1.touched || topicForm.submitted)\">\n        <p class=\"red\">Option 1 required, min 3 char</p>\n    </div>\n    <div *ngIf=\"!option_2.valid && (option_2.touched || topicForm.submitted)\">\n        <p class=\"red\">Option 2 required, min 3 char</p>\n    </div>\n    <div *ngIf=\"!option_3.valid && (option_3.touched || topicForm.submitted)\">\n        <p class=\"red\">Option 3 required, min 3 char</p>\n    </div>\n    <div *ngIf=\"!option_4.valid && (option_4.touched || topicForm.submitted)\">\n        <p class=\"red\">Option 4 required, min 3 char</p>\n    </div>\n\n\n  </div>-->\n\n</div>"
 
 /***/ }),
 
@@ -236,6 +244,8 @@ var DashboardComponent = (function () {
         this._router = _router;
         this._cookieService = _cookieService;
         this.aTaskEventEmitter = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"](); // emit from the form up to the parent
+        // local (component) variables 
+        this.game_profile = false; // false as default
         this.activeUser = ""; // null as default
         this.user_for_db = {
             name: "",
@@ -268,6 +278,7 @@ var DashboardComponent = (function () {
             this._router.navigateByUrl("/login");
         }
         else {
+            this.game_profile = false;
             this.activeUser = this._cookieService.get('username');
             console.log("cookie 22:", this._cookieService.get('username'));
             this._httpService.getUserId(this.activeUser)
@@ -301,6 +312,11 @@ var DashboardComponent = (function () {
             console.log("error doing getTopics:", err);
         });
     };
+    // GAMES
+    DashboardComponent.prototype.pong = function () {
+        this.game_profile = true;
+        this._router.navigateByUrl("/dashboard/pong");
+    };
     return DashboardComponent;
 }());
 __decorate([
@@ -318,6 +334,80 @@ DashboardComponent = __decorate([
 
 var _a, _b, _c;
 //# sourceMappingURL=dashboard.component.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/game/game.component.css":
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
+
+/***/ }),
+
+/***/ "../../../../../src/app/game/game.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div id=\"big_wrapper\">\n  <p>Game Space</p>\n\n\n  \n\n</div>"
+
+/***/ }),
+
+/***/ "../../../../../src/app/game/game.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__http_service__ = __webpack_require__("../../../../../src/app/http.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angular2_cookie_services_cookies_service__ = __webpack_require__("../../../../angular2-cookie/services/cookies.service.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angular2_cookie_services_cookies_service___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_angular2_cookie_services_cookies_service__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return GameComponent; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var GameComponent = (function () {
+    function GameComponent(_httpService, _router, _cookieService) {
+        this._httpService = _httpService;
+        this._router = _router;
+        this._cookieService = _cookieService;
+    }
+    GameComponent.prototype.ngOnInit = function () {
+        console.log("in the init of the game comp");
+        console.log(this._router.url);
+    };
+    return GameComponent;
+}());
+GameComponent = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'app-game',
+        template: __webpack_require__("../../../../../src/app/game/game.component.html"),
+        styles: [__webpack_require__("../../../../../src/app/game/game.component.css")]
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__http_service__["a" /* HttpService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__http_service__["a" /* HttpService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3_angular2_cookie_services_cookies_service__["CookieService"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_angular2_cookie_services_cookies_service__["CookieService"]) === "function" && _c || Object])
+], GameComponent);
+
+var _a, _b, _c;
+//# sourceMappingURL=game.component.js.map
 
 /***/ }),
 

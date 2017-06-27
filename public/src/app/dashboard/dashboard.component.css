@@ -4,10 +4,15 @@
     height: 720px;
     margin: 0px auto;
     background-color: lightskyblue;
+    border-top: 2px solid gray;
 }
 
 .red {
     color: red;
+}
+
+games_title {
+    text-align: middle;
 }
 
 .right {
@@ -55,7 +60,7 @@
     background-color: white;
     border-top: 2px solid gray;
     width: 1060px;
-    height: 200px;
+    height: 199px;
     padding: 5px;
     border-bottom-right-radius: 5px;
 }
