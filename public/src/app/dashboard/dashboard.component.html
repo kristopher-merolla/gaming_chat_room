@@ -19,19 +19,21 @@
     <div id="gameSpace">Games:</div>
 
     <div id="chatSpace">
-      <div *ngFor='let message of messages'>
-        ({{ message.createdAt | date: 'shortTime' }}) {{ message.name }}: {{ message.message }}
+      <div id="messageSpace">
+        <div *ngFor='let message of messages'>
+          ({{ message.createdAt | date: 'shortTime' }}) {{ message.name }}: {{ message.message }}
+        </div>
       </div>
-    </div>
-    <form #msgForm='ngForm' (submit)=onSubmit(msgForm)>
-      <input type="text" name="message"
-      [(ngModel)]='message_obj.message'
-      #message='ngModel'
-      required>
-      <input type="submit">
+      <form #msgForm='ngForm' (submit)=onSubmit(msgForm)>
+        <input id="msg_input" type="text" name="message"
+        [(ngModel)]='message_obj.message'
+        #message='ngModel'
+        required>
+        <input id="submitMsg" type="submit" value="Send">
       </form>
       <div *ngIf='message.errors && (msgForm.submitted )' class='red'>
         <li *ngIf='message.errors.required'>Message is required</li>
       </div>
+    </div>
   </div>
 </div>

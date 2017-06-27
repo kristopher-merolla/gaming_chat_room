@@ -58,5 +58,17 @@
     height: 200px;
     padding: 5px;
     border-bottom-right-radius: 5px;
+    /*overflow: scroll;*/
+}
+
+#msg_input{
+    width: 965px;
+    border-radius: 5px;
+    border: 2px solid silver;
+}
+
+#messageSpace {
+    width: 1060px;
+    height: 160px;
     overflow: scroll;
 }
