@@ -145,7 +145,7 @@ var _a;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__dashboard_dashboard_component__ = __webpack_require__("../../../../../src/app/dashboard/dashboard.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__chat_chat_component__ = __webpack_require__("../../../../../src/app/chat/chat.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__chat_chat_service__ = __webpack_require__("../../../../../src/app/chat/chat.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__game_game_component__ = __webpack_require__("../../../../../src/app/game/game.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__game_game_component__ = __webpack_require__("../../../../../src/app/game/game.component.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -153,6 +153,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -177,7 +178,7 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_8__login_login_component__["a" /* LoginComponent */],
             __WEBPACK_IMPORTED_MODULE_9__dashboard_dashboard_component__["a" /* DashboardComponent */],
             __WEBPACK_IMPORTED_MODULE_10__chat_chat_component__["a" /* ChatComponent */],
-            __WEBPACK_IMPORTED_MODULE_10__game_game_component__["a" /* GameComponent */],
+            __WEBPACK_IMPORTED_MODULE_12__game_game_component__["a" /* GameComponent */],
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -301,8 +302,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-
-exports.push([module.i, "#big_wrapper {\n    border-radius: 10px;\n    width: 1280px;\n    height: 720px;\n    margin: 0px auto;\n    background-color: lightskyblue;\n    border-top: 2px solid darkslategray;\n}\n\n.red {\n    color: red;\n}\n\n#games_title {\n    text-align: middle;\n}\n\n.right {\n    text-align: right;\n}\n\n#activeUser {\n    display: inline-block;\n    width: 95%;\n    padding-left: 10px;\n    color: darkslategray;\n}\n\n#online_header {\n    color: darkslategray;\n    text-align: center;\n}\n\n#optionBar {\n    display: inline-block;\n    text-align: right;\n}\n\n#rightSpace {\n    display: inline-block;\n    width: 1060px;\n    height: 661px;\n    margin-left: -4px;\n}\n\n#topBar {\n    border-bottom: 2px solid darkslategray;\n}\n\n#onlinePlayers {\n    display: inline-block;\n    vertical-align: top;\n    border-right: 2px solid darkslategray;\n    width: 220px;\n    height: 662px;\n    padding: 10px;\n}\n\n#gameSpace {\n    width: 1052px;\n    height: 461px;\n    padding: 10px;\n    display: inline-block;\n}\n\n#game_selector {\n    display: inline-block;\n}\n\n#chatSpace {\n    background-color: white;\n    border-top: 2px solid darkslategray;\n    width: 1060px;\n    height: 199px;\n    padding: 10px;\n    border-bottom-right-radius: 10px;\n}", ""]);
+exports.push([module.i, "#big_wrapper {\n    border-radius: 10px;\n    width: 1280px;\n    height: 720px;\n    margin: 0px auto;\n    background-color: lightskyblue;\n    border-top: 2px solid darkslategray;\n}\n\n.red {\n    color: red;\n}\n\n#games_title {\n    text-align: middle;\n}\n\n.right {\n    text-align: right;\n}\n\n#activeUser {\n    display: inline-block;\n    width: 95%;\n    padding-left: 10px;\n    color: darkslategray;\n}\n\n#online_header {\n    color: darkslategray;\n    text-align: center;\n}\n\n#optionBar {\n    display: inline-block;\n    text-align: right;\n}\n\n#rightSpace {\n    display: inline-block;\n    width: 1060px;\n    height: 661px;\n    margin-left: -4px;\n}\n\n#topBar {\n    border-bottom: 2px solid darkslategray;\n}\n\n#onlinePlayers {\n    display: inline-block;\n    vertical-align: top;\n    border-right: 2px solid darkslategray;\n    width: 220px;\n    height: 662px;\n    padding: 10px;\n}\n\n#gameSpace {\n    width: 1052px;\n    height: 461px;\n    padding: 10px;\n    display: inline-block;\n}\n\n#game_selector {\n    display: inline-block;\n}\n\n#chatSpace {\n    background-color: white;\n    border-top: 2px solid darkslategray;\n    width: 1060px;\n\n    height: 200px;\n    padding: 5px;\n    border-bottom-right-radius: 5px;\n    /*overflow: scroll;*/\n}\n\n#msg_input{\n    width: 965px;\n    border-radius: 5px;\n    border: 2px solid silver;\n}\n\n#messageSpace {\n    width: 1060px;\n    height: 160px;\n    overflow: scroll;\n=======\n    height: 199px;\n    padding: 10px;\n    border-bottom-right-radius: 10px;\n}", ""]);
 
 // exports
 
@@ -315,9 +315,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/dashboard/dashboard.component.html":
 /***/ (function(module, exports) {
 
-
-module.exports = "<div id=\"big_wrapper\">\n\n  <div id=\"topBar\">\n    <h3 id=\"activeUser\">Welcome: {{activeUser}}</h3>\n    <!--logout button-->\n    <div class=\"right\" id=\"optionBar\">\n      <a (click)=\"logoutUser()\">logout</a>\n    </div>\n  </div>\n\n  <div id=\"onlinePlayers\">\n    <h5>Players Online:</h5>\n    <div *ngFor=\"let player of players\">\n      {{player.name}}\n    </div>\n  </div>\n\n  <div id=\"rightSpace\">\n    <div id=\"gameSpace\">Games:</div>\n\n    <div id=\"chatSpace\">\n      <div id=\"messageSpace\">\n        <div *ngFor='let message of messages'>\n          ({{ message.createdAt | date: 'shortTime' }}) {{ message.name }}: {{ message.message }}\n        </div>\n      </div>\n      <form #msgForm='ngForm' (submit)=onSubmit(msgForm)>\n        <input id=\"msg_input\" type=\"text\" name=\"message\"\n        [(ngModel)]='message_obj.message'\n        #message='ngModel'\n        required>\n        <input id=\"submitMsg\" type=\"submit\" value=\"Send\">\n      </form>\n      <div *ngIf='message.errors && (msgForm.submitted )' class='red'>\n        <li *ngIf='message.errors.required'>Message is required</li>\n      </div>\n    </div>\n  </div>\n</div>"
-module.exports = "<div id=\"big_wrapper\">\n\n  <div id=\"topBar\">\n    <h3 id=\"activeUser\">Welcome: {{activeUser}}</h3>\n    <!--logout button-->\n    <div class=\"right\" id=\"optionBar\">\n      <a (click)=\"logoutUser()\" class=\"btn btn-primary btn-lg active btn-xs\" >logout</a>\n    </div>\n  </div>\n\n  <div id=\"onlinePlayers\">\n    <h5 id=\"online_header\">Look who's online</h5>\n    <div *ngFor=\"let player of players\">\n      {{player.name}}\n    </div>\n  </div>\n\n  <div id=\"rightSpace\">\n    <!--If we have not yet selected a game profile...-->\n    <div *ngIf=\"!game_profile\" id=\"gameSpace\">\n      <h1 id=\"games_title\">Games:</h1>\n      <div id=\"game_selector\">\n        <a (click)=\"pong()\">Pong</a>\n      </div>\n    </div>\n    <br>\n    <!--If we've selected a game profile, to load a component-->\n    <div *ngIf=\"game_profile\" id=\"gameSpace\">\n      <router-outlet></router-outlet>\n    </div>\n    <!--Global chat space-->\n    <div id=\"chatSpace\">\n      <p>Global Chat Space</p>\n    </div>\n  </div>\n\n\n</div>"
+module.exports = "<div id=\"big_wrapper\">\n\n  <div id=\"topBar\">\n    <h3 id=\"activeUser\">Welcome: {{activeUser}}</h3>\n    <!--logout button-->\n    <div class=\"right\" id=\"optionBar\">\n      <a (click)=\"logoutUser()\" class=\"btn btn-primary btn-lg active btn-xs\" >logout</a>\n    </div>\n  </div>\n\n  <div id=\"onlinePlayers\">\n    <h5 id=\"online_header\">Look who's online</h5>\n    <div *ngFor=\"let player of players\">\n      {{player.name}}\n    </div>\n  </div>\n\n  <div id=\"rightSpace\">\n\n    <!--If we have not yet selected a game profile...-->\n    <div *ngIf=\"!game_profile\" id=\"gameSpace\">\n      <h1 id=\"games_title\">Games:</h1>\n      <div id=\"game_selector\">\n        <a (click)=\"pong()\">Pong</a>\n      </div>\n    </div>\n    <br>\n    <!--If we've selected a game profile, to load a component-->\n    <div *ngIf=\"game_profile\" id=\"gameSpace\">\n      <router-outlet></router-outlet>\n    </div>\n    <!--Global chat space-->\n    <div id=\"chatSpace\">\n      <div id=\"messageSpace\">\n        <div *ngFor='let message of messages'>\n          ({{ message.createdAt | date: 'shortTime' }}) {{ message.name }}: {{ message.message }}\n        </div>\n      </div>\n      <form #msgForm='ngForm' (submit)=onSubmit(msgForm)>\n        <input id=\"msg_input\" type=\"text\" name=\"message\"\n        [(ngModel)]='message_obj.message'\n        #message='ngModel'\n        required>\n        <input id=\"submitMsg\" type=\"submit\" value=\"Send\">\n      </form>\n      <div *ngIf='message.errors && (msgForm.submitted )' class='red'>\n        <li *ngIf='message.errors.required'>Message is required</li>\n      </div>\n    </div>\n  </div>\n\n</div>"
 
 /***/ }),
 
@@ -451,7 +449,8 @@ var DashboardComponent = (function () {
         });
     };
     DashboardComponent.prototype.ngOnDestroy = function () {
-        this.connection.unsubscribe();
+        //this.connection.unsubscribe();
+    };
     // GAMES
     DashboardComponent.prototype.pong = function () {
         this.game_profile = true;

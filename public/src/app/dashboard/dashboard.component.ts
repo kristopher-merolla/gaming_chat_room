@@ -9,7 +9,7 @@ import { ChatService } from './../chat/chat.service';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
   messages = [];
   connection;
   message_obj = {
@@ -122,8 +122,9 @@ export class DashboardComponent implements OnInit {
 
 
   ngOnDestroy(){
-    this.connection.unsubscribe();
+    //this.connection.unsubscribe();
   }
+
   // GAMES
   pong() {
     this.game_profile = true;
