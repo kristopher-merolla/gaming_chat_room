@@ -5,7 +5,7 @@ var path = require('path');
 // // put in global promise
 mongoose.Promise = global.Promise;
 
-mongoose.connect('mongodb://localhost/beltExamPrep'); // database
+mongoose.connect('mongodb://localhost/chatroom'); // database
 
 var models_path = path.join(__dirname,'./../models');
 

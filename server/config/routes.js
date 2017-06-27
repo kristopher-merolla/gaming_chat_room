@@ -1,4 +1,5 @@
 var user = require('../controllers/user.js');
+var message = require('../controllers/message.js');
 const path = require('path');
 
 module.exports = function (app) {
@@ -13,7 +14,8 @@ module.exports = function (app) {
     app.post('/usercreate', user.create);
 
     app.post('/getUserId', user.show);
-
+    app.post('/message', message.create);
+    app.get('/messages', message.get);
     
     // "Catch All" route, put at bottom of other routes
     app.all("*", (req,res,next) => {

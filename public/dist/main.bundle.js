@@ -292,7 +292,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "#big_wrapper {\n    border-radius: 5px;\n    width: 1280px;\n    height: 720px;\n    margin: 0px auto;\n    background-color: lightskyblue;\n}\n\n.red {\n    color: red;\n}\n\n.right {\n    text-align: right;\n}\n\n#activeUser {\n    display: inline-block;\n    width: 95%;\n    padding-left: 5px;\n}\n\n#optionBar {\n    display: inline-block;\n    text-align: right;\n}\n\n#rightSpace {\n    display: inline-block;\n    width: 1060px;\n    height: 662px;\n    margin-left: -4px;\n}\n\n#topBar {\n    border-bottom: 2px solid gray;\n}\n\n#onlinePlayers {\n    display: inline-block;\n    vertical-align: top;\n    border-right: 2px solid gray;\n    width: 220px;\n    height: 662px;\n    padding: 5px;\n}\n\n#gameSpace {\n    width: 1052px;\n    height: 462px;\n    padding: 5px;\n}\n\n#chatSpace {\n    background-color: white;\n    border-top: 2px solid gray;\n    width: 1060px;\n    height: 200px;\n    padding: 5px;\n    border-bottom-right-radius: 5px;\n}", ""]);
+exports.push([module.i, "#big_wrapper {\n    border-radius: 5px;\n    width: 1280px;\n    height: 720px;\n    margin: 0px auto;\n    background-color: lightskyblue;\n}\n\n.red {\n    color: red;\n}\n\n.right {\n    text-align: right;\n}\n\n#activeUser {\n    display: inline-block;\n    width: 95%;\n    padding-left: 5px;\n}\n\n#optionBar {\n    display: inline-block;\n    text-align: right;\n}\n\n#rightSpace {\n    display: inline-block;\n    width: 1060px;\n    height: 662px;\n    margin-left: -4px;\n}\n\n#topBar {\n    border-bottom: 2px solid gray;\n}\n\n#onlinePlayers {\n    display: inline-block;\n    vertical-align: top;\n    border-right: 2px solid gray;\n    width: 220px;\n    height: 662px;\n    padding: 5px;\n}\n\n#gameSpace {\n    width: 1052px;\n    height: 462px;\n    padding: 5px;\n}\n\n#chatSpace {\n    background-color: white;\n    border-top: 2px solid gray;\n    width: 1060px;\n    height: 200px;\n    padding: 5px;\n    border-bottom-right-radius: 5px;\n    overflow: scroll;\n}", ""]);
 
 // exports
 
@@ -305,7 +305,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/dashboard/dashboard.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"big_wrapper\">\n\n  <div id=\"topBar\">\n    <h3 id=\"activeUser\">Welcome: {{activeUser}}</h3>\n    <!--logout button-->\n    <div class=\"right\" id=\"optionBar\">\n      <a (click)=\"logoutUser()\">logout</a>\n    </div>\n  </div>\n\n  <div id=\"onlinePlayers\">\n    <h5>Players Online:</h5>\n    <div *ngFor=\"let player of players\">\n      {{player.name}}\n    </div>\n  </div>\n\n  <div id=\"rightSpace\">\n    <div id=\"gameSpace\">Games:</div>\n\n    <div id=\"chatSpace\">Global Chat Space</div>\n  </div>\n\n  \n  \n\n  <!--<h5>Current Polls:</h5>\n\n  <div *ngIf=\"topics\">\n    \n    <table>\n      <tr>\n        <th>Name</th>\n        <th>Survey Question</th>\n        <th>Date Posted</th>\n        <th>Action</th>\n      </tr>\n      <tr *ngFor=\"let topic of topics\">\n        <td>{{topic.user}}</td>\n        <td><a href=\"/topic/{{topic._id}}\">{{topic.title}}</a></td>\n        <td>{{topic.createdAt | date}}</td>\n        <td *ngIf=\"topic.user==activeUser\"><a (click)=\"deleteTopic(topic._id)\">Delete</a></td>\n        <td *ngIf=\"topic.user!=activeUser\"></td>\n      </tr>\n    </table>\n  </div>\n\n  <br>\n\n  <h5>Create new Poll:</h5>\n\n  <div id=\"newTopicSpace\">\n      \n    <form #topicForm='ngForm' (submit)=\"addTopic(topicForm)\">\n      <label for=\"title\">Question:</label>\n      <input type=\"text\" name=\"title\" required minlength=\"8\" [(ngModel)]=\"topic.title\" #title=\"ngModel\">\n      <br>\n      <label for=\"option_1\">Option 1:</label>\n      <input type=\"text\" name=\"option_1\" required minlength=\"3\" [(ngModel)]=\"topic.option_1\" #option_1=\"ngModel\">\n      <br>\n      <br>\n      <label for=\"option_2\">Option 2:</label>\n      <input type=\"text\" name=\"option_2\" required minlength=\"3\" [(ngModel)]=\"topic.option_2\" #option_2=\"ngModel\">\n      <br>\n      <br>\n      <label for=\"option_3\">Option 3:</label>\n      <input type=\"text\" name=\"option_3\" required minlength=\"3\" [(ngModel)]=\"topic.option_3\" #option_3=\"ngModel\">\n      <br>\n      <br>\n      <label for=\"option_4\">Option 4:</label>\n      <input type=\"text\" name=\"option_4\" required minlength=\"3\" [(ngModel)]=\"topic.option_4\" #option_4=\"ngModel\">\n      <br><br>\n      <button type=\"submit\" [disabled]=\"!topicForm.valid\">Create Poll</button>\n    </form>\n\n    <div *ngIf=\"!title.valid && (title.touched || topicForm.submitted)\">\n        <p class=\"red\">Question required, min 8 char</p>\n    </div>\n    <div *ngIf=\"!option_1.valid && (option_1.touched || topicForm.submitted)\">\n        <p class=\"red\">Option 1 required, min 3 char</p>\n    </div>\n    <div *ngIf=\"!option_2.valid && (option_2.touched || topicForm.submitted)\">\n        <p class=\"red\">Option 2 required, min 3 char</p>\n    </div>\n    <div *ngIf=\"!option_3.valid && (option_3.touched || topicForm.submitted)\">\n        <p class=\"red\">Option 3 required, min 3 char</p>\n    </div>\n    <div *ngIf=\"!option_4.valid && (option_4.touched || topicForm.submitted)\">\n        <p class=\"red\">Option 4 required, min 3 char</p>\n    </div>\n\n\n  </div>-->\n\n</div>"
+module.exports = "<div id=\"big_wrapper\">\n\n  <div id=\"topBar\">\n    <h3 id=\"activeUser\">Welcome: {{activeUser}}</h3>\n    <!--logout button-->\n    <div class=\"right\" id=\"optionBar\">\n      <a (click)=\"logoutUser()\">logout</a>\n    </div>\n  </div>\n\n  <div id=\"onlinePlayers\">\n    <h5>Players Online:</h5>\n    <div *ngFor=\"let player of players\">\n      {{player.name}}\n    </div>\n  </div>\n\n  <div id=\"rightSpace\">\n    <div id=\"gameSpace\">Games:</div>\n\n    <div id=\"chatSpace\">\n      <div *ngFor='let message of messages'>\n        ({{ message.createdAt | date: 'shortTime' }}) {{ message.name }}: {{ message.message }}\n      </div>\n    </div>\n    <form #msgForm='ngForm' (submit)=onSubmit(msgForm)>\n      <input type=\"text\" name=\"message\"\n      [(ngModel)]='message_obj.message'\n      #message='ngModel'\n      required>\n      <input type=\"submit\">\n      </form>\n      <div *ngIf='message.errors && (msgForm.submitted )' class='red'>\n        <li *ngIf='message.errors.required'>Message is required</li>\n      </div>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -336,11 +336,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var DashboardComponent = (function () {
     function DashboardComponent(_httpService, _router, _cookieService, _chatService) {
+        var _this = this;
         this._httpService = _httpService;
         this._router = _router;
         this._cookieService = _cookieService;
         this._chatService = _chatService;
         this.messages = [];
+        this.message_obj = {
+            message: '',
+            name: '',
+        };
         this.aTaskEventEmitter = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"](); // emit from the form up to the parent
         this.activeUser = ""; // null as default
         this.user_for_db = {
@@ -349,11 +354,30 @@ var DashboardComponent = (function () {
         };
         this.errors = null;
         this.players = null;
+        this._httpService.getMessage()
+            .then(function (obj) {
+            _this.messages = obj.reverse();
+        })
+            .catch(function (err) { console.log(err); });
     }
     // sendMessage(){
     //   this._chatService.sendMessage(this.message);
     //   this.message = '';
     // }
+    DashboardComponent.prototype.onSubmit = function (form) {
+        var _this = this;
+        this.message_obj.name = this._cookieService.get('username');
+        this._httpService.createMessage(this.message_obj)
+            .then(function (obj) {
+            form.resetForm();
+            _this._httpService.getMessage()
+                .then(function (data) {
+                _this.messages = data.reverse();
+            })
+                .catch(function (err) { console.log(err); });
+        })
+            .catch(function (err) { console.log(err); });
+    };
     DashboardComponent.prototype.logoutUser = function () {
         var _this = this;
         // get user id
@@ -487,6 +511,12 @@ var HttpService = (function () {
     HttpService.prototype.logStatusTrue = function (user) {
         return this._http.post('/logStatusTrue', user).map(function (data) { return data.json(); }).toPromise();
     };
+    HttpService.prototype.createMessage = function (message) {
+        return this._http.post('/message', message).map(function (data) { return data.json(); }).toPromise();
+    };
+    HttpService.prototype.getMessage = function () {
+        return this._http.get('/messages').map(function (data) { return data.json(); }).toPromise();
+    };
     return HttpService;
 }());
 HttpService = __decorate([
@@ -556,6 +586,9 @@ var LoginComponent = (function () {
         this.user = {
             name: ""
         };
+        if (this._cookieService.get('username')) {
+            this._router.navigate(['dashboard']);
+        }
     }
     LoginComponent.prototype.login = function (form) {
         var _this = this;

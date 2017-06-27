@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var User = mongoose.model('Users');
+var Message = mongoose.model('Messages');
 
 module.exports = {
     // basic CRUD operations (boilerplate)

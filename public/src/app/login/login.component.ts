@@ -13,7 +13,15 @@ export class LoginComponent implements OnInit {
   @Output()
   aTaskEventEmitter = new EventEmitter(); // emit from the form up to the parent
 
-  constructor(private _httpService: HttpService, private _router: Router, private _cookieService:CookieService) { }
+  constructor(
+    private _httpService: HttpService,
+    private _router: Router,
+    private _cookieService:CookieService
+  ) {
+    if(this._cookieService.get('username')){
+      this._router.navigate(['dashboard']);
+    }
+  }
 
   user = {
     name: ""

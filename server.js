@@ -13,10 +13,10 @@ app.use(express.static(path.join(__dirname, './public/dist')));
 var routes = require('./server/config/routes.js')(app);
 
 io.on('connection', (socket) => {
-    console.log('user connected');
+    console.log('user connected', socket.id);
     socket.on('disconnect', function(){
         // need to fix bug where if someone closes tab, they're still considered online
-        console.log('user disconnected');
+        console.log('user disconnected', socket.id);
     })
     // socket.on('add-message', (message) => {
     //     io.emit('message', {type: 'new-message', text: message});

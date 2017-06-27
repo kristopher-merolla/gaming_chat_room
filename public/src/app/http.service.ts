@@ -41,5 +41,12 @@ export class HttpService {
     return this._http.post('/logStatusTrue', user).map((data)=>data.json()).toPromise();
   }
 
+  createMessage(message) {
+    return this._http.post('/message', message).map((data)=>data.json()).toPromise();
+  }
+
+  getMessage() {
+    return this._http.get('/messages').map((data)=>data.json()).toPromise();
+  }
 
 }

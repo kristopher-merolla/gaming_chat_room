@@ -12,14 +12,24 @@ import { ChatService } from './../chat/chat.service';
 export class DashboardComponent implements OnInit {
   messages = [];
   connection;
-  message;
+  message_obj = {
+    message: '',
+    name: '',
+  }
   @Output() aTaskEventEmitter = new EventEmitter(); // emit from the form up to the parent
 
   constructor(
     private _httpService: HttpService,
     private _router: Router,
     private _cookieService:CookieService,
-    private _chatService: ChatService) { }
+    private _chatService: ChatService
+  ){
+    this._httpService.getMessage()
+    .then(obj=>{
+      this.messages = obj.reverse();
+    })
+    .catch(err=>{console.log(err);})
+  }
 
   activeUser = ""; // null as default
 
@@ -32,6 +42,20 @@ export class DashboardComponent implements OnInit {
   //   this._chatService.sendMessage(this.message);
   //   this.message = '';
   // }
+
+  onSubmit(form){
+    this.message_obj.name = this._cookieService.get('username');
+    this._httpService.createMessage(this.message_obj)
+    .then(obj=>{
+      form.resetForm();
+      this._httpService.getMessage()
+      .then(data=>{
+        this.messages = data.reverse();
+      })
+      .catch(err=>{console.log(err);})
+    })
+    .catch(err=>{console.log(err);})
+  }
 
   logoutUser() {
     // get user id
