@@ -14,8 +14,9 @@ import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ChatComponent } from './chat/chat.component';
 
-import { ChatService } from './chat/chat.service';
 import { GameComponent } from './game/game.component';
+
+import { ChatService } from './chat.service';
 
 @NgModule({
   declarations: [
