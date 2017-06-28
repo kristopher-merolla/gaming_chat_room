@@ -68,10 +68,10 @@ function golf() {
 	keyState = {};
 	// Track keyboard presses
 	document.addEventListener("keydown", function(evt) {
-		keystate[evt.keyCode] = true;
+		keyState[evt.keyCode] = true;
 	});
 	document.addEventListener("keyup", function(evt) {
-		delete keystate[evt.keyCode];
+		delete keyState[evt.keyCode];
 	});
 	
 
