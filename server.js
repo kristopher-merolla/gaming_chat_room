@@ -14,6 +14,7 @@ var routes = require('./server/config/routes.js')(app);
 
 io.on('connection', (socket) => {
     console.log('user connected', socket.id);
+    socket.emit('user_login', socket.id);
     socket.on('disconnect', function(){
         console.log('user disconnected', socket.id);
         io.emit('user_logout', socket.id);

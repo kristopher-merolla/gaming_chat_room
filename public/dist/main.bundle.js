@@ -673,7 +673,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, ".red {\n    color: whitesmoke;\n}\n\n#big_wrapper {\n    border: 1px solid black;\n    padding: 10px;\n    margin: 0px auto;\n    border-radius: 5px;\n    text-align: center;\n    width: auto;\n    height: 100vh;\n    background-color: lightskyblue;\n}", ""]);
+exports.push([module.i, "* {\n    padding: 0px;\n    margin: 0px;\n}\ndiv#big_wrapper {\n    margin: 0px auto;\n    border-radius: 5px;\n    text-align: center;\n    width: auto;\n    height: 100vh;\n    background-color: #141414;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n}\ndiv#login-box {\n    background-color: #4f4f4f;\n    width: 350px;\n    height: 250px;\n    margin: auto;\n    border-radius: 5px 5px 0 0;\n}\nh3 {\n    background-color: #ea5849;\n    border-radius: 5px 5px 0 0;\n    padding: 10px;\n}\n.red {\n    color: whitesmoke;\n}\n.form-control{\n    width: 300px;\n    margin: auto;\n    margin-top: 30px;\n    padding: 5px;\n}\n.btn-default {\n    margin-top: 30px;\n    width: 300px;\n    height: 35px;\n    background-color: #ec8e40;\n    border: none;\n}", ""]);
 
 // exports
 
@@ -686,7 +686,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/login/login.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"big_wrapper\">\n\n  <h3>Welcome!</h3>\n  <br>\n  <h5>Please login below</h5>\n\n  <!--simple form with validations:-->\n  <form #loginForm='ngForm' (submit)=\"login(loginForm)\">\n    <label for=\"username\">Username:</label>\n    <input id=\"nameField\" type=\"text\" name=\"username\" required minlength=\"4\" maxlength=\"24\" [(ngModel)]=\"user.name\" #name=\"ngModel\">\n    <button id=\"loginButton\" type=\"submit\" [disabled]=\"!loginForm.valid\">Login</button>\n  </form>\n\n  <div *ngIf=\"!name.valid && (name.touched || loginForm.submitted)\">\n      <p class=\"red\">Name required, min 4 char, max 24 char</p>\n  </div>\n\n</div>"
+module.exports = "<div id=\"big_wrapper\">\n  <div id=\"login-box\">\n    <h3>Login</h3>\n    <form #loginForm='ngForm' (submit)=\"login(loginForm)\">\n      <div class=\"form-group\">\n        <input class=\"form-control\" type=\"text\" name=\"username\" placeholder=\"Username\"\n        required\n        minlength=\"2\"\n        maxlength=\"24\"\n        [(ngModel)]=\"user.name\"\n        #name=\"ngModel\">\n        <button id=\"loginButton\" class=\"btn btn-default\" type=\"submit\"\n        [disabled]=\"!loginForm.valid\">Enter</button>\n      </div>\n    </form>\n    <div *ngIf=\"!name.valid && (name.touched || loginForm.submitted)\">\n      <p class=\"red\">Name must be at least 2 characters</p>\n    </div>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -754,8 +754,6 @@ var LoginComponent = (function () {
             }
         })
             .catch();
-    };
-    LoginComponent.prototype.ngOnInit = function () {
     };
     return LoginComponent;
 }());
