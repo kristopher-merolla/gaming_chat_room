@@ -4,7 +4,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 
 // variables for js file functions
-declare var pong, golf: any;
+declare var pong: any;
+declare var golf: any;
 
 @Component({
   selector: 'app-game',
