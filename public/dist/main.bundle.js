@@ -492,7 +492,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "canvas {\n    border: 1px solid black;\n    margin-top: -20px;\n    width: 560px;\n    height: 460px;\n}", ""]);
+exports.push([module.i, "#canvas {\n    border: 1px dotted red;\n    margin-top: -20px;\n}\n\n/*#pong_space {\n    border: 1px dotted red;\n    margin-top: -20px;\n}*/", ""]);
 
 // exports
 
@@ -505,7 +505,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/game/game.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\n\n<div id=\"big_wrapper\">\n\n  <!--<h1>{{game_profile}}</h1>-->\n\n\n<canvas></canvas>\n\n\n</div>\n"
+module.exports = "\n\n<div id=\"big_wrapper\">\n\n  <!--<h1>{{game_profile}}</h1>-->\n\n\n<!--<canvas></canvas>-->\n\n<div id=\"canvas\"></div> \n\n<!--Need to give credit for pong game-->\n\n\n\n</div>\n"
 
 /***/ }),
 
@@ -532,55 +532,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-// require('require-ensure');
-// require('./../../assets/scripts/pong.js');
 var GameComponent = (function () {
     function GameComponent(_httpService, _router, _cookieService) {
         this._httpService = _httpService;
         this._router = _router;
         this._cookieService = _cookieService;
-        // require.ensure(['./../../assets/scripts/pong.js'], require => {
-        //     let yourModule = require('./../../assets/scripts/pong.js');
-        //     yourModule.someFunction();
-        //  });
     }
+    GameComponent.prototype.loadPong = function () {
+        new main();
+    };
     GameComponent.prototype.ngOnInit = function () {
         var url = this._router.url; // we know this will contain "/dashboard/" and then the game
         // console.log(url.substring(11));
         this.game_profile = url.substring(11); // so grab the substring
         if (this.game_profile == "pong") {
+            console.log("starting pong...");
             this.loadPong();
         }
-    };
-    GameComponent.prototype.loadPong = function () {
-        console.log('hello pong');
-        var animate = window.requestAnimationFrame ||
-            window.webkitRequestAnimationFrame ||
-            function (callback) { window.setTimeout(callback, 1000 / 60); };
-        // setup canvas
-        var canvas = document.createElement('canvas');
-        canvas.width = 560;
-        canvas.height = 460;
-        console.log(canvas.width);
-        var context = canvas.getContext('2d');
-        //
-        window.onload = function () {
-            console.log("inside window onload");
-            document.body.appendChild(canvas);
-            animate(step);
-        };
-        var step = function () {
-            update();
-            render();
-            animate(step);
-        };
-        var update = function () {
-        };
-        var render = function () {
-            context.fillStyle = "#FF00FF";
-            console.log("inside render", canvas.width);
-            context.fillRect(0, 0, canvas.width, canvas.height);
-        };
     };
     return GameComponent;
 }());
