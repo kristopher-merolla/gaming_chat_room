@@ -153,7 +153,7 @@ ball = {
 /**
  * Starts the game
  */
-function main() {
+function pong() {
 	// create, initiate and append game canvas
 	canvas = document.createElement("canvas");
 	canvas.width = WIDTH;

@@ -3,8 +3,8 @@ import { HttpService } from './../http.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 
-
-declare var main: any;
+// variables for js file functions
+declare var pong, golf: any;
 
 @Component({
   selector: 'app-game',
@@ -14,7 +14,11 @@ declare var main: any;
 export class GameComponent implements OnInit {
 
   loadPong() {
-    new main();
+    new pong(); // starts the pong game
+  }
+
+  loadGolf() {
+    new golf(); // starts the pong game
   }
 
   constructor(private _httpService: HttpService, private _router: Router, private _cookieService:CookieService) {
@@ -29,6 +33,10 @@ export class GameComponent implements OnInit {
     if(this.game_profile == "pong") {
       console.log("starting pong...");
       this.loadPong();
+    }
+    if(this.game_profile == "golf") {
+      console.log("starting golf...");
+      this.loadGolf();
     }
   }
 
