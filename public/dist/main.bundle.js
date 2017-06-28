@@ -205,7 +205,7 @@ AppModule = __decorate([
 
 var ChatService = (function () {
     function ChatService() {
-        this.url = 'http://localhost:8000';
+        this.url = 'http://localhost:8000/dashboard';
     }
     ChatService.prototype.sendMessage = function (message) {
         this.socket = __WEBPACK_IMPORTED_MODULE_1_socket_io_client__(this.url);
@@ -216,6 +216,19 @@ var ChatService = (function () {
         var observable = new __WEBPACK_IMPORTED_MODULE_0_rxjs_Observable__["Observable"](function (observer) {
             _this.socket = __WEBPACK_IMPORTED_MODULE_1_socket_io_client__(_this.url);
             _this.socket.on('message', function (data) {
+                observer.next(data);
+            });
+            return function () {
+                _this.socket.disconnect();
+            };
+        });
+        return observable;
+    };
+    ChatService.prototype.getSocketID = function () {
+        var _this = this;
+        var observable = new __WEBPACK_IMPORTED_MODULE_0_rxjs_Observable__["Observable"](function (observer) {
+            _this.socket = __WEBPACK_IMPORTED_MODULE_1_socket_io_client__(_this.url);
+            _this.socket.on('user_logout', function (data) {
                 observer.next(data);
             });
             return function () {
@@ -300,7 +313,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "#big_wrapper {\n    border-radius: 10px;\n    width: 1280px;\n    height: 720px;\n    margin: 0px auto;\n    background-color: lightskyblue;\n    border-top: 2px solid darkslategray;\n}\n\n.red {\n    color: red;\n}\n\n#games_title {\n    text-align: middle;\n}\n\n.right {\n    text-align: right;\n}\n\n#activeUser {\n    display: inline-block;\n    width: 95%;\n    padding-left: 10px;\n    color: darkslategray;\n}\n\n#online_header {\n    color: darkslategray;\n    text-align: center;\n}\n\n#optionBar {\n    display: inline-block;\n    text-align: right;\n}\n\n#rightSpace {\n    display: inline-block;\n    width: 1060px;\n    height: 661px;\n    margin-left: -4px;\n}\n\n#topBar {\n    border-bottom: 2px solid darkslategray;\n}\n\n#onlinePlayers {\n    display: inline-block;\n    vertical-align: top;\n    border-right: 2px solid darkslategray;\n    width: 220px;\n    height: 662px;\n    padding: 10px;\n}\n\n#gameSpace {\n    width: 1052px;\n    height: 461px;\n    padding: 10px;\n    display: inline-block;\n}\n\n#game_selector {\n    display: inline-block;\n}\n\n#chatSpace {\n    background-color: white;\n    border-top: 2px solid darkslategray;\n    width: 1060px;\n\n    height: 200px;\n    padding: 5px;\n    border-bottom-right-radius: 5px;\n    /*overflow: scroll;*/\n}\n\n#msg_input{\n    width: 965px;\n    border-radius: 5px;\n    border: 2px solid silver;\n}\n\n#messageSpace {\n    width: 1060px;\n    height: 160px;\n    overflow: scroll;\n=======\n    height: 199px;\n    padding: 10px;\n    border-bottom-right-radius: 10px;\n}", ""]);
+exports.push([module.i, "#big_wrapper {\n    border-radius: 10px;\n    width: 1280px;\n    height: 720px;\n    margin: 0px auto;\n    background-color: lightskyblue;\n    border-top: 2px solid darkslategray;\n}\n\n.red {\n    color: red;\n}\n\n#games_title {\n    text-align: middle;\n}\n\n.right {\n    text-align: right;\n}\n\n#activeUser {\n    display: inline-block;\n    width: 95%;\n    padding-left: 10px;\n    color: darkslategray;\n}\n\n#online_header {\n    color: darkslategray;\n    text-align: center;\n}\n\n#optionBar {\n    display: inline-block;\n    text-align: right;\n}\n\n#rightSpace {\n    display: inline-block;\n    width: 1060px;\n    height: 661px;\n    margin-left: -4px;\n}\n\n#topBar {\n    border-bottom: 2px solid darkslategray;\n}\n\n#onlinePlayers {\n    display: inline-block;\n    vertical-align: top;\n    border-right: 2px solid darkslategray;\n    width: 220px;\n    height: 662px;\n    padding: 10px;\n}\n\n#gameSpace {\n    width: 1052px;\n    height: 461px;\n    padding: 10px;\n    display: inline-block;\n}\n\n#game_selector {\n    display: inline-block;\n}\n\n#chatSpace {\n    background-color: white;\n    border-top: 2px solid darkslategray;\n    width: 1060px;\n    padding: 5px;\n    border-bottom-right-radius: 5px;\n    /*overflow: scroll;*/\n}\n\n#msg_input{\n    width: 965px;\n    border-radius: 5px;\n    border: 2px solid silver;\n}\n\n#messageSpace {\n    width: 1060px;\n    height: 160px;\n    overflow: scroll;\n    padding: 10px;\n    border-bottom-right-radius: 10px;\n}\n\n", ""]);
 
 // exports
 
@@ -355,6 +368,10 @@ var DashboardComponent = (function () {
             name: '',
         };
         this.aTaskEventEmitter = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"](); // emit from the form up to the parent
+        // sendMessage() {
+        // this._chatService.sendMessage(this._cookieService.get('username') + ' has logged on');
+        // this.message='';
+        // }
         // local (component) variables 
         this.game_profile = false; // false as default
         this.activeUser = ""; // null as default
@@ -371,10 +388,6 @@ var DashboardComponent = (function () {
         })
             .catch(function (err) { console.log(err); });
     }
-    DashboardComponent.prototype.sendMessage = function () {
-        this._chatService.sendMessage(this._cookieService.get('username') + ' has logged on');
-        // this.message='';
-    };
     DashboardComponent.prototype.onSubmit = function (form) {
         var _this = this;
         this.message_obj.name = this._cookieService.get('username');
@@ -421,6 +434,9 @@ var DashboardComponent = (function () {
                 })
                     .catch(function (err) { console.log(err); });
             });
+            // this.connection = this._chatService.getSocketID().subscribe(id => {
+            //   console.log(id + ' disconnected');
+            // })
             this.game_profile = false;
             this.activeUser = this._cookieService.get('username');
             this._httpService.getUserId(this.activeUser)
@@ -675,6 +691,7 @@ module.exports = "<div id=\"big_wrapper\">\n\n  <h3>Welcome!</h3>\n  <br>\n  <h5
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angular2_cookie_services_cookies_service__ = __webpack_require__("../../../../angular2-cookie/services/cookies.service.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angular2_cookie_services_cookies_service___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_angular2_cookie_services_cookies_service__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__chat_service__ = __webpack_require__("../../../../../src/app/chat.service.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -689,12 +706,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 // declare var $:any;
 var LoginComponent = (function () {
-    function LoginComponent(_httpService, _router, _cookieService) {
+    function LoginComponent(_httpService, _router, _cookieService, _chatService) {
         this._httpService = _httpService;
         this._router = _router;
         this._cookieService = _cookieService;
+        this._chatService = _chatService;
         this.aTaskEventEmitter = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"](); // emit from the form up to the parent
         this.user = {
             name: ""
@@ -702,13 +721,6 @@ var LoginComponent = (function () {
         if (this._cookieService.get('username')) {
             this._router.navigate(['dashboard']);
         }
-        // var socket = io.connect();
-        // $(document).on('click','#loginButton', function(event){
-        //   socket.emit('user_logged_on', $('#nameField').val());
-        // });
-        // socket.on('show_user_login', function (data){
-        //   console.log('received from server', data);
-        // })
     }
     LoginComponent.prototype.login = function (form) {
         var _this = this;
@@ -749,10 +761,10 @@ LoginComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/login/login.component.html"),
         styles: [__webpack_require__("../../../../../src/app/login/login.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__http_service__["a" /* HttpService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__http_service__["a" /* HttpService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3_angular2_cookie_services_cookies_service__["CookieService"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_angular2_cookie_services_cookies_service__["CookieService"]) === "function" && _c || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__http_service__["a" /* HttpService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__http_service__["a" /* HttpService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3_angular2_cookie_services_cookies_service__["CookieService"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_angular2_cookie_services_cookies_service__["CookieService"]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__chat_service__["a" /* ChatService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__chat_service__["a" /* ChatService */]) === "function" && _d || Object])
 ], LoginComponent);
 
-var _a, _b, _c;
+var _a, _b, _c, _d;
 //# sourceMappingURL=login.component.js.map
 
 /***/ }),

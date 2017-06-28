@@ -31,10 +31,10 @@ export class DashboardComponent implements OnInit, OnDestroy{
     })
     .catch(err=>{console.log(err);})
   }
-  sendMessage() {
-    this._chatService.sendMessage(this._cookieService.get('username') + ' has logged on');
+  // sendMessage() {
+    // this._chatService.sendMessage(this._cookieService.get('username') + ' has logged on');
     // this.message='';
-  }
+  // }
   // local (component) variables 
   game_profile = false; // false as default
   activeUser = ""; // null as default
@@ -89,6 +89,9 @@ export class DashboardComponent implements OnInit, OnDestroy{
         })
         .catch(err=>{console.log(err);})
       })
+      // this.connection = this._chatService.getSocketID().subscribe(id => {
+      //   console.log(id + ' disconnected');
+      // })
       this.game_profile = false;
       this.activeUser = this._cookieService.get('username');
       this._httpService.getUserId(this.activeUser)

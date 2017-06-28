@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { HttpService } from './../http.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
+import { ChatService } from './../chat.service';
 
 // declare var $:any;
 
@@ -19,17 +20,11 @@ export class LoginComponent implements OnInit {
     private _httpService: HttpService,
     private _router: Router,
     private _cookieService:CookieService,
+    private _chatService: ChatService,
   ) {
     if(this._cookieService.get('username')){
       this._router.navigate(['dashboard']);
     }
-    // var socket = io.connect();
-    // $(document).on('click','#loginButton', function(event){
-    //   socket.emit('user_logged_on', $('#nameField').val());
-    // });
-    // socket.on('show_user_login', function (data){
-    //   console.log('received from server', data);
-    // })
   }
 
   user = {
