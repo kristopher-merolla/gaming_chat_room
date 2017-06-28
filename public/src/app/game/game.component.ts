@@ -3,8 +3,6 @@ import { HttpService } from './../http.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 
-// require('require-ensure');
-// require('./../../assets/scripts/pong.js');
 
 declare var main: any;
 
