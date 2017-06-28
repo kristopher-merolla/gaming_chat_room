@@ -1,18 +1,20 @@
 <div id="big_wrapper">
-
-  <h3>Welcome!</h3>
-  <br>
-  <h5>Please login below</h5>
-
-  <!--simple form with validations:-->
-  <form #loginForm='ngForm' (submit)="login(loginForm)">
-    <label for="username">Username:</label>
-    <input id="nameField" type="text" name="username" required minlength="4" maxlength="24" [(ngModel)]="user.name" #name="ngModel">
-    <button id="loginButton" type="submit" [disabled]="!loginForm.valid">Login</button>
-  </form>
-
-  <div *ngIf="!name.valid && (name.touched || loginForm.submitted)">
-      <p class="red">Name required, min 4 char, max 24 char</p>
+  <div id="login-box">
+    <h3>Login</h3>
+    <form #loginForm='ngForm' (submit)="login(loginForm)">
+      <div class="form-group">
+        <input class="form-control" type="text" name="username" placeholder="Username"
+        required
+        minlength="2"
+        maxlength="24"
+        [(ngModel)]="user.name"
+        #name="ngModel">
+        <button id="loginButton" class="btn btn-default" type="submit"
+        [disabled]="!loginForm.valid">Enter</button>
+      </div>
+    </form>
+    <div *ngIf="!name.valid && (name.touched || loginForm.submitted)">
+      <p class="red">Name must be at least 2 characters</p>
+    </div>
   </div>
-
 </div>

@@ -11,7 +11,7 @@ import { ChatService } from './../chat.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
   @Output()
   aTaskEventEmitter = new EventEmitter(); // emit from the form up to the parent
@@ -55,8 +55,4 @@ export class LoginComponent implements OnInit {
       })
       .catch()
   }
-
-  ngOnInit() {
-  }
-
 }

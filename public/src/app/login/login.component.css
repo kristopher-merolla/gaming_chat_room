@@ -1,14 +1,42 @@
-.red {
-    color: whitesmoke;
+* {
+    padding: 0px;
+    margin: 0px;
 }
-
-#big_wrapper {
-    border: 1px solid black;
-    padding: 10px;
+div#big_wrapper {
     margin: 0px auto;
     border-radius: 5px;
     text-align: center;
     width: auto;
     height: 100vh;
-    background-color: lightskyblue;
+    background-color: #141414;
+    display: flex;
+    justify-content: center;
+}
+div#login-box {
+    background-color: #4f4f4f;
+    width: 350px;
+    height: 250px;
+    margin: auto;
+    border-radius: 5px 5px 0 0;
+}
+h3 {
+    background-color: #ea5849;
+    border-radius: 5px 5px 0 0;
+    padding: 10px;
+}
+.red {
+    color: whitesmoke;
+}
+.form-control{
+    width: 300px;
+    margin: auto;
+    margin-top: 30px;
+    padding: 5px;
+}
+.btn-default {
+    margin-top: 30px;
+    width: 300px;
+    height: 35px;
+    background-color: #ec8e40;
+    border: none;
 }
