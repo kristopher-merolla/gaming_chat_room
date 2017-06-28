@@ -7,8 +7,8 @@
   <!--simple form with validations:-->
   <form #loginForm='ngForm' (submit)="login(loginForm)">
     <label for="username">Username:</label>
-    <input type="text" name="username" required minlength="4" maxlength="24" [(ngModel)]="user.name" #name="ngModel">
-    <button type="submit" [disabled]="!loginForm.valid">Login</button>
+    <input id="nameField" type="text" name="username" required minlength="4" maxlength="24" [(ngModel)]="user.name" #name="ngModel">
+    <button id="loginButton" type="submit" [disabled]="!loginForm.valid">Login</button>
   </form>
 
   <div *ngIf="!name.valid && (name.touched || loginForm.submitted)">

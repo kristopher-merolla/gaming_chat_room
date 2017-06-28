@@ -35,13 +35,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 var routes = [
-    { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
-    { path: 'login', component: __WEBPACK_IMPORTED_MODULE_3__login_login_component__["a" /* LoginComponent */] },
+    { path: '', component: __WEBPACK_IMPORTED_MODULE_3__login_login_component__["a" /* LoginComponent */] },
     { path: 'dashboard', component: __WEBPACK_IMPORTED_MODULE_2__dashboard_dashboard_component__["a" /* DashboardComponent */], children: [
             { path: 'pong', component: __WEBPACK_IMPORTED_MODULE_4__game_game_component__["a" /* GameComponent */] }
         ] },
-    // { path: 'dashboard/pong', component: GameComponent },
-    // catch all goes at the bottom!
     { path: '**', redirectTo: '/dashboard' }
 ];
 var AppRoutingModule = (function () {
@@ -144,8 +141,8 @@ var _a;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__login_login_component__ = __webpack_require__("../../../../../src/app/login/login.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__dashboard_dashboard_component__ = __webpack_require__("../../../../../src/app/dashboard/dashboard.component.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__chat_chat_component__ = __webpack_require__("../../../../../src/app/chat/chat.component.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__chat_chat_service__ = __webpack_require__("../../../../../src/app/chat/chat.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__game_game_component__ = __webpack_require__("../../../../../src/app/game/game.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__game_game_component__ = __webpack_require__("../../../../../src/app/game/game.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__chat_service__ = __webpack_require__("../../../../../src/app/chat.service.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -178,7 +175,7 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_8__login_login_component__["a" /* LoginComponent */],
             __WEBPACK_IMPORTED_MODULE_9__dashboard_dashboard_component__["a" /* DashboardComponent */],
             __WEBPACK_IMPORTED_MODULE_10__chat_chat_component__["a" /* ChatComponent */],
-            __WEBPACK_IMPORTED_MODULE_12__game_game_component__["a" /* GameComponent */],
+            __WEBPACK_IMPORTED_MODULE_11__game_game_component__["a" /* GameComponent */],
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -186,12 +183,64 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_2__angular_http__["a" /* HttpModule */],
             __WEBPACK_IMPORTED_MODULE_5__angular_forms__["a" /* FormsModule */],
         ],
-        providers: [__WEBPACK_IMPORTED_MODULE_3__http_service__["a" /* HttpService */], __WEBPACK_IMPORTED_MODULE_4_angular2_cookie_core__["CookieService"], __WEBPACK_IMPORTED_MODULE_11__chat_chat_service__["a" /* ChatService */]],
+        providers: [__WEBPACK_IMPORTED_MODULE_3__http_service__["a" /* HttpService */], __WEBPACK_IMPORTED_MODULE_4_angular2_cookie_core__["CookieService"], __WEBPACK_IMPORTED_MODULE_12__chat_service__["a" /* ChatService */]],
         bootstrap: [__WEBPACK_IMPORTED_MODULE_7__app_component__["a" /* AppComponent */]]
     })
 ], AppModule);
 
 //# sourceMappingURL=app.module.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/chat.service.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_rxjs_Observable__ = __webpack_require__("../../../../rxjs/Observable.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_rxjs_Observable__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_socket_io_client__ = __webpack_require__("../../../../socket.io-client/lib/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_socket_io_client___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_socket_io_client__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ChatService; });
+
+
+var ChatService = (function () {
+    function ChatService() {
+        this.url = 'http://localhost:8000/dashboard';
+    }
+    ChatService.prototype.sendMessage = function (message) {
+        this.socket = __WEBPACK_IMPORTED_MODULE_1_socket_io_client__(this.url);
+        this.socket.emit('add-message', message);
+    };
+    ChatService.prototype.getMessages = function () {
+        var _this = this;
+        var observable = new __WEBPACK_IMPORTED_MODULE_0_rxjs_Observable__["Observable"](function (observer) {
+            _this.socket = __WEBPACK_IMPORTED_MODULE_1_socket_io_client__(_this.url);
+            _this.socket.on('message', function (data) {
+                observer.next(data);
+            });
+            return function () {
+                _this.socket.disconnect();
+            };
+        });
+        return observable;
+    };
+    ChatService.prototype.getSocketID = function () {
+        var _this = this;
+        var observable = new __WEBPACK_IMPORTED_MODULE_0_rxjs_Observable__["Observable"](function (observer) {
+            _this.socket = __WEBPACK_IMPORTED_MODULE_1_socket_io_client__(_this.url);
+            _this.socket.on('user_logout', function (data) {
+                observer.next(data);
+            });
+            return function () {
+                _this.socket.disconnect();
+            };
+        });
+        return observable;
+    };
+    return ChatService;
+}());
+
+//# sourceMappingURL=chat.service.js.map
 
 /***/ }),
 
@@ -256,44 +305,6 @@ ChatComponent = __decorate([
 
 /***/ }),
 
-/***/ "../../../../../src/app/chat/chat.service.ts":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_rxjs_Observable__ = __webpack_require__("../../../../rxjs/Observable.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_rxjs_Observable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_rxjs_Observable__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_socket_io_client__ = __webpack_require__("../../../../socket.io-client/lib/index.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_socket_io_client___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_socket_io_client__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ChatService; });
-
-
-var ChatService = (function () {
-    function ChatService() {
-        this.url = 'http://localhost:8000';
-    }
-    ChatService.prototype.sendMessage = function (message) {
-        this.socket.emit('add-message', message);
-    };
-    ChatService.prototype.getMessages = function () {
-        var _this = this;
-        var observable = new __WEBPACK_IMPORTED_MODULE_0_rxjs_Observable__["Observable"](function (observer) {
-            _this.socket = __WEBPACK_IMPORTED_MODULE_1_socket_io_client__(_this.url);
-            _this.socket.on('message', function (data) {
-                observer.next(data);
-            });
-            return function () {
-                _this.socket.disconnect();
-            };
-        });
-        return observable;
-    };
-    return ChatService;
-}());
-
-//# sourceMappingURL=chat.service.js.map
-
-/***/ }),
-
 /***/ "../../../../../src/app/dashboard/dashboard.component.css":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -302,7 +313,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "#big_wrapper {\n    border-radius: 10px;\n    width: 1280px;\n    height: 720px;\n    margin: 0px auto;\n    background-color: lightskyblue;\n    border-top: 2px solid darkslategray;\n}\n\n.red {\n    color: red;\n}\n\n#games_title {\n    text-align: middle;\n}\n\n.right {\n    text-align: right;\n}\n\n#activeUser {\n    display: inline-block;\n    width: 95%;\n    padding-left: 10px;\n    color: darkslategray;\n}\n\n#online_header {\n    color: darkslategray;\n    text-align: center;\n}\n\n#optionBar {\n    display: inline-block;\n    text-align: right;\n}\n\n#rightSpace {\n    display: inline-block;\n    width: 1060px;\n    height: 661px;\n    margin-left: -4px;\n}\n\n#topBar {\n    border-bottom: 2px solid darkslategray;\n}\n\n#onlinePlayers {\n    display: inline-block;\n    vertical-align: top;\n    border-right: 2px solid darkslategray;\n    width: 220px;\n    height: 662px;\n    padding: 10px;\n}\n\n#gameSpace {\n    width: 1052px;\n    height: 461px;\n    padding: 10px;\n    display: inline-block;\n}\n\n#game_selector {\n    display: inline-block;\n}\n\n#chatSpace {\n    background-color: white;\n    border-top: 2px solid darkslategray;\n    width: 1060px;\n\n    height: 200px;\n    padding: 5px;\n    border-bottom-right-radius: 5px;\n    /*overflow: scroll;*/\n}\n\n#msg_input{\n    width: 965px;\n    border-radius: 5px;\n    border: 2px solid silver;\n}\n\n#messageSpace {\n    width: 1060px;\n    height: 160px;\n    overflow: scroll;\n=======\n    height: 199px;\n    padding: 10px;\n    border-bottom-right-radius: 10px;\n}", ""]);
+exports.push([module.i, "#big_wrapper {\n    border-radius: 10px;\n    width: 1280px;\n    height: 720px;\n    margin: 0px auto;\n    background-color: lightskyblue;\n    border-top: 2px solid darkslategray;\n}\n\n.red {\n    color: red;\n}\n\n#games_title {\n    text-align: middle;\n}\n\n.right {\n    text-align: right;\n}\n\n#activeUser {\n    display: inline-block;\n    width: 95%;\n    padding-left: 10px;\n    color: darkslategray;\n}\n\n#online_header {\n    color: darkslategray;\n    text-align: center;\n}\n\n#optionBar {\n    display: inline-block;\n    text-align: right;\n}\n\n#rightSpace {\n    display: inline-block;\n    width: 1060px;\n    height: 661px;\n    margin-left: -4px;\n}\n\n#topBar {\n    border-bottom: 2px solid darkslategray;\n}\n\n#onlinePlayers {\n    display: inline-block;\n    vertical-align: top;\n    border-right: 2px solid darkslategray;\n    width: 220px;\n    height: 662px;\n    padding: 10px;\n}\n\n#gameSpace {\n    width: 1052px;\n    height: 461px;\n    padding: 10px;\n    display: inline-block;\n}\n\n#game_selector {\n    display: inline-block;\n}\n\n#chatSpace {\n    background-color: white;\n    border-top: 2px solid darkslategray;\n    width: 1060px;\n    padding: 5px;\n    border-bottom-right-radius: 5px;\n    /*overflow: scroll;*/\n}\n\n#msg_input{\n    width: 965px;\n    border-radius: 5px;\n    border: 2px solid silver;\n}\n\n#messageSpace {\n    width: 1060px;\n    height: 160px;\n    overflow: scroll;\n    padding: 10px;\n    border-bottom-right-radius: 10px;\n}\n\n", ""]);
 
 // exports
 
@@ -315,7 +326,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/dashboard/dashboard.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"big_wrapper\">\n\n  <div id=\"topBar\">\n    <h3 id=\"activeUser\">Welcome: {{activeUser}}</h3>\n    <!--logout button-->\n    <div class=\"right\" id=\"optionBar\">\n      <a (click)=\"logoutUser()\" class=\"btn btn-primary btn-lg active btn-xs\" >logout</a>\n    </div>\n  </div>\n\n  <div id=\"onlinePlayers\">\n    <h5 id=\"online_header\">Look who's online</h5>\n    <div *ngFor=\"let player of players\">\n      {{player.name}}\n    </div>\n  </div>\n\n  <div id=\"rightSpace\">\n\n    <!--If we have not yet selected a game profile...-->\n    <div *ngIf=\"!game_profile\" id=\"gameSpace\">\n      <h1 id=\"games_title\">Games:</h1>\n      <div id=\"game_selector\">\n        <a (click)=\"pong()\">Pong</a>\n      </div>\n    </div>\n    <br>\n    <!--If we've selected a game profile, to load a component-->\n    <div *ngIf=\"game_profile\" id=\"gameSpace\">\n      <router-outlet></router-outlet>\n    </div>\n    <!--Global chat space-->\n    <div id=\"chatSpace\">\n      <div id=\"messageSpace\">\n        <div *ngFor='let message of messages'>\n          ({{ message.createdAt | date: 'shortTime' }}) {{ message.name }}: {{ message.message }}\n        </div>\n      </div>\n      <form #msgForm='ngForm' (submit)=onSubmit(msgForm)>\n        <input id=\"msg_input\" type=\"text\" name=\"message\"\n        [(ngModel)]='message_obj.message'\n        #message='ngModel'\n        required>\n        <input id=\"submitMsg\" type=\"submit\" value=\"Send\">\n      </form>\n      <div *ngIf='message.errors && (msgForm.submitted )' class='red'>\n        <li *ngIf='message.errors.required'>Message is required</li>\n      </div>\n    </div>\n  </div>\n\n</div>"
+module.exports = "<div id=\"big_wrapper\">\n  <div id=\"topBar\">\n    <h3 id=\"activeUser\">Welcome: {{activeUser}}</h3>\n    <!--logout button-->\n    <div class=\"right\" id=\"optionBar\">\n      <a (click)=\"logoutUser()\" class=\"btn btn-primary btn-lg active btn-xs\" >logout</a>\n    </div>\n  </div>\n\n  <div id=\"onlinePlayers\">\n    <h5 id=\"online_header\">Look who's online</h5>\n    <div *ngFor=\"let player of players\">\n      {{player.name}}\n    </div>\n  </div>\n\n  <div id=\"rightSpace\">\n\n    <!--If we have not yet selected a game profile...-->\n    <div *ngIf=\"!game_profile\" id=\"gameSpace\">\n      <h1 id=\"games_title\">Games:</h1>\n      <div id=\"game_selector\">\n        <a (click)=\"pong()\">Pong</a>\n      </div>\n    </div>\n    <br>\n    <!--If we've selected a game profile, to load a component-->\n    <div *ngIf=\"game_profile\" id=\"gameSpace\">\n      <router-outlet></router-outlet>\n    </div>\n    <!--Global chat space-->\n    <div id=\"chatSpace\">\n      <div id=\"messageSpace\">\n        <div *ngFor='let message of messages'>\n          ({{ message.createdAt | date: 'shortTime' }})\n          {{ message.name }}: {{ message.message }}\n        </div>\n      </div>\n      \n      <form #msgForm='ngForm' (submit)=onSubmit(msgForm)>\n        <input id=\"msg_input\" type=\"text\" name=\"message\"\n        [(ngModel)]='message_obj.message'\n        #message='ngModel'\n        required>\n        <input id=\"submitMsg\" type=\"submit\" value=\"Send\">\n      </form>\n      <div *ngIf='message.errors && (msgForm.submitted )' class='red'>\n        <li *ngIf='message.errors.required'>Message is required</li>\n      </div>\n    </div>\n  </div>\n\n</div>"
 
 /***/ }),
 
@@ -328,7 +339,7 @@ module.exports = "<div id=\"big_wrapper\">\n\n  <div id=\"topBar\">\n    <h3 id=
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angular2_cookie_core__ = __webpack_require__("../../../../angular2-cookie/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angular2_cookie_core___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_angular2_cookie_core__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__chat_chat_service__ = __webpack_require__("../../../../../src/app/chat/chat.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__chat_service__ = __webpack_require__("../../../../../src/app/chat.service.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return DashboardComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -357,6 +368,10 @@ var DashboardComponent = (function () {
             name: '',
         };
         this.aTaskEventEmitter = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"](); // emit from the form up to the parent
+        // sendMessage() {
+        // this._chatService.sendMessage(this._cookieService.get('username') + ' has logged on');
+        // this.message='';
+        // }
         // local (component) variables 
         this.game_profile = false; // false as default
         this.activeUser = ""; // null as default
@@ -366,25 +381,24 @@ var DashboardComponent = (function () {
         };
         this.errors = null;
         this.players = null;
+        // this.sendMessage();
         this._httpService.getMessage()
             .then(function (obj) {
             _this.messages = obj.reverse();
         })
             .catch(function (err) { console.log(err); });
     }
-    // sendMessage(){
-    //   this._chatService.sendMessage(this.message);
-    //   this.message = '';
-    // }
     DashboardComponent.prototype.onSubmit = function (form) {
         var _this = this;
         this.message_obj.name = this._cookieService.get('username');
+        this._chatService.sendMessage(this.message_obj);
         this._httpService.createMessage(this.message_obj)
             .then(function (obj) {
-            form.resetForm();
+            // form.resetForm();
             _this._httpService.getMessage()
                 .then(function (data) {
                 _this.messages = data.reverse();
+                form.resetForm();
             })
                 .catch(function (err) { console.log(err); });
         })
@@ -401,7 +415,7 @@ var DashboardComponent = (function () {
                 // reset active user and remove cookie, reroute to login page
                 _this.activeUser = "";
                 _this._cookieService.removeAll();
-                _this._router.navigateByUrl("/login");
+                _this._router.navigate(['']);
             })
                 .catch();
         })
@@ -410,13 +424,19 @@ var DashboardComponent = (function () {
     DashboardComponent.prototype.ngOnInit = function () {
         var _this = this;
         if (!this._cookieService.get('username')) {
-            this._router.navigateByUrl("/login");
+            this._router.navigateByUrl("/");
         }
         else {
-            // Initialize socket connection
             this.connection = this._chatService.getMessages().subscribe(function (message) {
-                console.log(message);
+                _this._httpService.getMessage()
+                    .then(function (data) {
+                    _this.messages = data.reverse();
+                })
+                    .catch(function (err) { console.log(err); });
             });
+            // this.connection = this._chatService.getSocketID().subscribe(id => {
+            //   console.log(id + ' disconnected');
+            // })
             this.game_profile = false;
             this.activeUser = this._cookieService.get('username');
             this._httpService.getUserId(this.activeUser)
@@ -449,7 +469,7 @@ var DashboardComponent = (function () {
         });
     };
     DashboardComponent.prototype.ngOnDestroy = function () {
-        //this.connection.unsubscribe();
+        this.connection.unsubscribe();
     };
     // GAMES
     DashboardComponent.prototype.pong = function () {
@@ -476,7 +496,7 @@ DashboardComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/dashboard/dashboard.component.html"),
         styles: [__webpack_require__("../../../../../src/app/dashboard/dashboard.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__http_service__["a" /* HttpService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__http_service__["a" /* HttpService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3_angular2_cookie_core__["CookieService"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_angular2_cookie_core__["CookieService"]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__chat_chat_service__["a" /* ChatService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__chat_chat_service__["a" /* ChatService */]) === "function" && _d || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__http_service__["a" /* HttpService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__http_service__["a" /* HttpService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3_angular2_cookie_core__["CookieService"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_angular2_cookie_core__["CookieService"]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__chat_service__["a" /* ChatService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__chat_service__["a" /* ChatService */]) === "function" && _d || Object])
 ], DashboardComponent);
 
 var _a, _b, _c, _d;
@@ -658,7 +678,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/login/login.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"big_wrapper\">\n\n  <h3>Welcome!</h3>\n  <br>\n  <h5>Please login below</h5>\n\n  <!--simple form with validations:-->\n  <form #loginForm='ngForm' (submit)=\"login(loginForm)\">\n    <label for=\"username\">Username:</label>\n    <input type=\"text\" name=\"username\" required minlength=\"4\" maxlength=\"24\" [(ngModel)]=\"user.name\" #name=\"ngModel\">\n    <button type=\"submit\" [disabled]=\"!loginForm.valid\">Login</button>\n  </form>\n\n  <div *ngIf=\"!name.valid && (name.touched || loginForm.submitted)\">\n      <p class=\"red\">Name required, min 4 char, max 24 char</p>\n  </div>\n\n</div>"
+module.exports = "<div id=\"big_wrapper\">\n\n  <h3>Welcome!</h3>\n  <br>\n  <h5>Please login below</h5>\n\n  <!--simple form with validations:-->\n  <form #loginForm='ngForm' (submit)=\"login(loginForm)\">\n    <label for=\"username\">Username:</label>\n    <input id=\"nameField\" type=\"text\" name=\"username\" required minlength=\"4\" maxlength=\"24\" [(ngModel)]=\"user.name\" #name=\"ngModel\">\n    <button id=\"loginButton\" type=\"submit\" [disabled]=\"!loginForm.valid\">Login</button>\n  </form>\n\n  <div *ngIf=\"!name.valid && (name.touched || loginForm.submitted)\">\n      <p class=\"red\">Name required, min 4 char, max 24 char</p>\n  </div>\n\n</div>"
 
 /***/ }),
 
@@ -671,6 +691,7 @@ module.exports = "<div id=\"big_wrapper\">\n\n  <h3>Welcome!</h3>\n  <br>\n  <h5
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angular2_cookie_services_cookies_service__ = __webpack_require__("../../../../angular2-cookie/services/cookies.service.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_angular2_cookie_services_cookies_service___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_angular2_cookie_services_cookies_service__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__chat_service__ = __webpack_require__("../../../../../src/app/chat.service.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -685,11 +706,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
+// declare var $:any;
 var LoginComponent = (function () {
-    function LoginComponent(_httpService, _router, _cookieService) {
+    function LoginComponent(_httpService, _router, _cookieService, _chatService) {
         this._httpService = _httpService;
         this._router = _router;
         this._cookieService = _cookieService;
+        this._chatService = _chatService;
         this.aTaskEventEmitter = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["EventEmitter"](); // emit from the form up to the parent
         this.user = {
             name: ""
@@ -706,6 +730,7 @@ var LoginComponent = (function () {
             if (user.user != null) {
                 // have user in db, update cookie, then redirect
                 _this._cookieService.put('username', user.user.name);
+                // emit event 'user_logged_on'
                 form.resetForm();
                 _this._router.navigateByUrl("/dashboard");
             }
@@ -736,10 +761,10 @@ LoginComponent = __decorate([
         template: __webpack_require__("../../../../../src/app/login/login.component.html"),
         styles: [__webpack_require__("../../../../../src/app/login/login.component.css")]
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__http_service__["a" /* HttpService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__http_service__["a" /* HttpService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3_angular2_cookie_services_cookies_service__["CookieService"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_angular2_cookie_services_cookies_service__["CookieService"]) === "function" && _c || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__http_service__["a" /* HttpService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__http_service__["a" /* HttpService */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_router__["b" /* Router */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3_angular2_cookie_services_cookies_service__["CookieService"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3_angular2_cookie_services_cookies_service__["CookieService"]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__chat_service__["a" /* ChatService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__chat_service__["a" /* ChatService */]) === "function" && _d || Object])
 ], LoginComponent);
 
-var _a, _b, _c;
+var _a, _b, _c, _d;
 //# sourceMappingURL=login.component.js.map
 
 /***/ }),

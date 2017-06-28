@@ -2,16 +2,16 @@ import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angu
 import { HttpService } from './../http.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CookieService } from 'angular2-cookie/core';
-import { ChatService } from './../chat/chat.service';
+import { ChatService } from './../chat.service';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit, OnDestroy {
-  messages = [];
+export class DashboardComponent implements OnInit, OnDestroy{
   connection;
+  messages = [];
   message_obj = {
     message: '',
     name: '',
@@ -22,15 +22,19 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private _httpService: HttpService,
     private _router: Router,
     private _cookieService:CookieService,
-    private _chatService: ChatService
+    private _chatService: ChatService,
   ){
+    // this.sendMessage();
     this._httpService.getMessage()
     .then(obj=>{
       this.messages = obj.reverse();
     })
     .catch(err=>{console.log(err);})
   }
-
+  // sendMessage() {
+    // this._chatService.sendMessage(this._cookieService.get('username') + ' has logged on');
+    // this.message='';
+  // }
   // local (component) variables 
   game_profile = false; // false as default
   activeUser = ""; // null as default
@@ -40,19 +44,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
     logStatus: false
   }
 
-  // sendMessage(){
-  //   this._chatService.sendMessage(this.message);
-  //   this.message = '';
-  // }
-
   onSubmit(form){
     this.message_obj.name = this._cookieService.get('username');
+    this._chatService.sendMessage(this.message_obj);
     this._httpService.createMessage(this.message_obj)
     .then(obj=>{
-      form.resetForm();
+      // form.resetForm();
       this._httpService.getMessage()
       .then(data=>{
         this.messages = data.reverse();
+        form.resetForm();
       })
       .catch(err=>{console.log(err);})
     })
@@ -69,7 +70,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         // reset active user and remove cookie, reroute to login page
         this.activeUser = "";
         this._cookieService.removeAll();
-        this._router.navigateByUrl("/login");
+        this._router.navigate(['']);
       })
       .catch()
     })
@@ -78,13 +79,19 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     if(!this._cookieService.get('username')) { // catch a user trying to access dashboard without logging in!
-      this._router.navigateByUrl("/login");
+      this._router.navigateByUrl("/");
     }
     else {
-      // Initialize socket connection
       this.connection = this._chatService.getMessages().subscribe(message => {
-        console.log(message)
+        this._httpService.getMessage()
+        .then(data=>{
+          this.messages = data.reverse();
+        })
+        .catch(err=>{console.log(err);})
       })
+      // this.connection = this._chatService.getSocketID().subscribe(id => {
+      //   console.log(id + ' disconnected');
+      // })
       this.game_profile = false;
       this.activeUser = this._cookieService.get('username');
       this._httpService.getUserId(this.activeUser)
@@ -120,9 +127,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
     })
   }
 
-
-  ngOnDestroy(){
-    //this.connection.unsubscribe();
+  ngOnDestroy() {
+    this.connection.unsubscribe();
   }
 
   // GAMES
@@ -140,5 +146,4 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.game_profile = true;
     this._router.navigateByUrl("/dashboard/snake");
   }
-
 }

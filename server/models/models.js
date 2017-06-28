@@ -10,7 +10,6 @@ mongoose.model("Users", userSchema);
 
 var messageSchema = mongoose.Schema({
 	message: { type: String, required: true, minlength: 1 },
-	sever_msg: { type: String },
 	name: { type: String }
 }, { timestamps: true })
 mongoose.model('Messages', messageSchema);

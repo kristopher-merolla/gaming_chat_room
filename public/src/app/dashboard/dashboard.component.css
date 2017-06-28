@@ -71,8 +71,6 @@
     background-color: white;
     border-top: 2px solid darkslategray;
     width: 1060px;
-
-    height: 200px;
     padding: 5px;
     border-bottom-right-radius: 5px;
     /*overflow: scroll;*/
@@ -88,8 +86,7 @@
     width: 1060px;
     height: 160px;
     overflow: scroll;
-=======
-    height: 199px;
     padding: 10px;
     border-bottom-right-radius: 10px;
 }
+

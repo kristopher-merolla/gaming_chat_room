@@ -1,5 +1,4 @@
 <div id="big_wrapper">
-
   <div id="topBar">
     <h3 id="activeUser">Welcome: {{activeUser}}</h3>
     <!--logout button-->
@@ -33,9 +32,11 @@
     <div id="chatSpace">
       <div id="messageSpace">
         <div *ngFor='let message of messages'>
-          ({{ message.createdAt | date: 'shortTime' }}) {{ message.name }}: {{ message.message }}
+          ({{ message.createdAt | date: 'shortTime' }})
+          {{ message.name }}: {{ message.message }}
         </div>
       </div>
+      
       <form #msgForm='ngForm' (submit)=onSubmit(msgForm)>
         <input id="msg_input" type="text" name="message"
         [(ngModel)]='message_obj.message'

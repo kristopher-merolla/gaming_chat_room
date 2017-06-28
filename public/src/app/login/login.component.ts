@@ -2,6 +2,9 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { HttpService } from './../http.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
+import { ChatService } from './../chat.service';
+
+// declare var $:any;
 
 @Component({
   selector: 'app-login',
@@ -16,7 +19,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private _httpService: HttpService,
     private _router: Router,
-    private _cookieService:CookieService
+    private _cookieService:CookieService,
+    private _chatService: ChatService,
   ) {
     if(this._cookieService.get('username')){
       this._router.navigate(['dashboard']);
@@ -34,6 +38,7 @@ export class LoginComponent implements OnInit {
         if(user.user != null) {
           // have user in db, update cookie, then redirect
           this._cookieService.put('username', user.user.name);
+          // emit event 'user_logged_on'
           form.resetForm();
           this._router.navigateByUrl("/dashboard");
         }
