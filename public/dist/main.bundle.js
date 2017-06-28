@@ -37,7 +37,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var routes = [
     { path: '', component: __WEBPACK_IMPORTED_MODULE_3__login_login_component__["a" /* LoginComponent */] },
     { path: 'dashboard', component: __WEBPACK_IMPORTED_MODULE_2__dashboard_dashboard_component__["a" /* DashboardComponent */], children: [
-            { path: 'pong', component: __WEBPACK_IMPORTED_MODULE_4__game_game_component__["a" /* GameComponent */] }
+            { path: 'pong', component: __WEBPACK_IMPORTED_MODULE_4__game_game_component__["a" /* GameComponent */] },
+            { path: 'golf', component: __WEBPACK_IMPORTED_MODULE_4__game_game_component__["a" /* GameComponent */] }
         ] },
     { path: '**', redirectTo: '/dashboard' }
 ];
@@ -326,7 +327,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/dashboard/dashboard.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"big_wrapper\">\n  <div id=\"topBar\">\n    <h3 id=\"activeUser\">Welcome: {{activeUser}}</h3>\n    <!--logout button-->\n    <div class=\"right\" id=\"optionBar\">\n      <a (click)=\"logoutUser()\" class=\"btn btn-primary btn-lg active btn-xs\" >logout</a>\n    </div>\n  </div>\n\n  <div id=\"onlinePlayers\">\n    <h5 id=\"online_header\">Look who's online</h5>\n    <div *ngFor=\"let player of players\">\n      {{player.name}}\n    </div>\n  </div>\n\n  <div id=\"rightSpace\">\n\n    <!--If we have not yet selected a game profile...-->\n    <div *ngIf=\"!game_profile\" id=\"gameSpace\">\n      <h1 id=\"games_title\">Games:</h1>\n      <div id=\"game_selector\">\n        <a (click)=\"pong()\">Pong</a>\n      </div>\n    </div>\n    <br>\n    <!--If we've selected a game profile, to load a component-->\n    <div *ngIf=\"game_profile\" id=\"gameSpace\">\n      <router-outlet></router-outlet>\n    </div>\n    <!--Global chat space-->\n    <div id=\"chatSpace\">\n      <div id=\"messageSpace\">\n        <div *ngFor='let message of messages'>\n          ({{ message.createdAt | date: 'shortTime' }})\n          {{ message.name }}: {{ message.message }}\n        </div>\n      </div>\n      \n      <form #msgForm='ngForm' (submit)=onSubmit(msgForm)>\n        <input id=\"msg_input\" type=\"text\" name=\"message\"\n        [(ngModel)]='message_obj.message'\n        #message='ngModel'\n        required>\n        <input id=\"submitMsg\" type=\"submit\" value=\"Send\">\n      </form>\n      <div *ngIf='message.errors && (msgForm.submitted )' class='red'>\n        <li *ngIf='message.errors.required'>Message is required</li>\n      </div>\n    </div>\n  </div>\n\n</div>"
+module.exports = "<div id=\"big_wrapper\">\n  <div id=\"topBar\">\n    <h3 id=\"activeUser\">Welcome: {{activeUser}}</h3>\n    <!--logout button-->\n    <div class=\"right\" id=\"optionBar\">\n      <a (click)=\"logoutUser()\" class=\"btn btn-primary btn-lg active btn-xs\" >logout</a>\n    </div>\n  </div>\n\n  <div id=\"onlinePlayers\">\n    <h5 id=\"online_header\">Look who's online</h5>\n    <div *ngFor=\"let player of players\">\n      {{player.name}}\n    </div>\n  </div>\n\n  <div id=\"rightSpace\">\n\n    <!--If we have not yet selected a game profile...-->\n    <div *ngIf=\"!game_profile\" id=\"gameSpace\">\n      <h1 id=\"games_title\">Games:</h1>\n      <div id=\"game_selector\">\n        <a (click)=\"pong()\">Pong</a>\n        <a (click)=\"golf()\">Golf</a>\n      </div>\n    </div>\n    <br>\n    <!--If we've selected a game profile, to load a component-->\n    <div *ngIf=\"game_profile\" id=\"gameSpace\">\n      <router-outlet></router-outlet>\n    </div>\n    <!--Global chat space-->\n    <div id=\"chatSpace\">\n      <div id=\"messageSpace\">\n        <div *ngFor='let message of messages'>\n          ({{ message.createdAt | date: 'shortTime' }})\n          {{ message.name }}: {{ message.message }}\n        </div>\n      </div>\n      \n      <form #msgForm='ngForm' (submit)=onSubmit(msgForm)>\n        <input id=\"msg_input\" type=\"text\" name=\"message\"\n        [(ngModel)]='message_obj.message'\n        #message='ngModel'\n        required>\n        <input id=\"submitMsg\" type=\"submit\" value=\"Send\">\n      </form>\n      <div *ngIf='message.errors && (msgForm.submitted )' class='red'>\n        <li *ngIf='message.errors.required'>Message is required</li>\n      </div>\n    </div>\n  </div>\n\n</div>"
 
 /***/ }),
 
@@ -525,7 +526,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/game/game.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\n\n<div id=\"big_wrapper\">\n\n  <!--<h1>{{game_profile}}</h1>-->\n\n\n<!--<canvas></canvas>-->\n\n<div id=\"canvas\"></div> \n\n<!--Need to give credit for pong game-->\n\n\n\n</div>\n"
+module.exports = "\n\n<div id=\"big_wrapper\">\n\n  <!--<h1>{{game_profile}}</h1>-->\n\n\n\n<!--Game canvas div-->\n<div id=\"canvas\"></div>\n<!--Need to give credit for pong game-->\n\n\n</div>\n"
 
 /***/ }),
 
@@ -559,7 +560,10 @@ var GameComponent = (function () {
         this._cookieService = _cookieService;
     }
     GameComponent.prototype.loadPong = function () {
-        new main();
+        new pong(); // starts the pong game
+    };
+    GameComponent.prototype.loadGolf = function () {
+        new golf(); // starts the pong game
     };
     GameComponent.prototype.ngOnInit = function () {
         var url = this._router.url; // we know this will contain "/dashboard/" and then the game
@@ -568,6 +572,10 @@ var GameComponent = (function () {
         if (this.game_profile == "pong") {
             console.log("starting pong...");
             this.loadPong();
+        }
+        if (this.game_profile == "golf") {
+            console.log("starting golf...");
+            this.loadGolf();
         }
     };
     return GameComponent;
