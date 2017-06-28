@@ -3,7 +3,7 @@ const path = require('path');
 const app = express();
 const bodyParser = require('body-parser');
 const mongoose = require('./server/config/mongoose.js');
-const http = require('http').createServer(app);
+const http = require('http').Server(app);
 const io = require('socket.io')(http);
 
 app.use(bodyParser.json());
@@ -15,14 +15,16 @@ var routes = require('./server/config/routes.js')(app);
 io.on('connection', (socket) => {
     console.log('user connected', socket.id);
     socket.on('disconnect', function(){
-        // need to fix bug where if someone closes tab, they're still considered online
         console.log('user disconnected', socket.id);
+        io.emit('user_logout', socket.id);
     })
-    // socket.on('add-message', (message) => {
-    //     io.emit('message', {type: 'new-message', text: message});
-    // })
+    socket.on('add-message',(message) => {
+        console.log('Server:', message);
+        socket.broadcast.emit('message', message);
+    })
 })
 
 http.listen(8000, function () {
     console.log('listening on port 8000');
 })
+

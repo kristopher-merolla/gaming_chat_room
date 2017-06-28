@@ -8,7 +8,6 @@ export class ChatService {
 
   sendMessage(message) {
     this.socket = io(this.url);
-    console.log('inside chat service', message);
     this.socket.emit('add-message', message);
   }
 

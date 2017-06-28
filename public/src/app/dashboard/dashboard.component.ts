@@ -10,8 +10,6 @@ import { ChatService } from './../chat.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit, OnDestroy{
-  test_messages = [];
-  message = '';
   connection;
   messages = [];
   message_obj = {
@@ -51,10 +49,11 @@ export class DashboardComponent implements OnInit, OnDestroy{
     this._chatService.sendMessage(this.message_obj);
     this._httpService.createMessage(this.message_obj)
     .then(obj=>{
-      form.resetForm();
+      // form.resetForm();
       this._httpService.getMessage()
       .then(data=>{
         this.messages = data.reverse();
+        form.resetForm();
       })
       .catch(err=>{console.log(err);})
     })
@@ -84,8 +83,11 @@ export class DashboardComponent implements OnInit, OnDestroy{
     }
     else {
       this.connection = this._chatService.getMessages().subscribe(message => {
-        console.log('pushing now');
-        this.messages.push(message);
+        this._httpService.getMessage()
+        .then(data=>{
+          this.messages = data.reverse();
+        })
+        .catch(err=>{console.log(err);})
       })
       this.game_profile = false;
       this.activeUser = this._cookieService.get('username');
@@ -141,5 +143,4 @@ export class DashboardComponent implements OnInit, OnDestroy{
     this.game_profile = true;
     this._router.navigateByUrl("/dashboard/snake");
   }
-
 }

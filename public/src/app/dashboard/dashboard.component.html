@@ -32,7 +32,7 @@
     <div id="chatSpace">
       <div id="messageSpace">
         <div *ngFor='let message of messages'>
-          <!--({{ message.createdAt | date: 'shortTime' }})-->
+          ({{ message.createdAt | date: 'shortTime' }})
           {{ message.name }}: {{ message.message }}
         </div>
       </div>

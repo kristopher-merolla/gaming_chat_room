@@ -209,7 +209,6 @@ var ChatService = (function () {
     }
     ChatService.prototype.sendMessage = function (message) {
         this.socket = __WEBPACK_IMPORTED_MODULE_1_socket_io_client__(this.url);
-        console.log('inside chat service', message);
         this.socket.emit('add-message', message);
     };
     ChatService.prototype.getMessages = function () {
@@ -314,7 +313,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/dashboard/dashboard.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div id=\"big_wrapper\">\n  <div id=\"topBar\">\n    <h3 id=\"activeUser\">Welcome: {{activeUser}}</h3>\n    <!--logout button-->\n    <div class=\"right\" id=\"optionBar\">\n      <a (click)=\"logoutUser()\" class=\"btn btn-primary btn-lg active btn-xs\" >logout</a>\n    </div>\n  </div>\n\n  <div id=\"onlinePlayers\">\n    <h5 id=\"online_header\">Look who's online</h5>\n    <div *ngFor=\"let player of players\">\n      {{player.name}}\n    </div>\n  </div>\n\n  <div id=\"rightSpace\">\n\n    <!--If we have not yet selected a game profile...-->\n    <div *ngIf=\"!game_profile\" id=\"gameSpace\">\n      <h1 id=\"games_title\">Games:</h1>\n      <div id=\"game_selector\">\n        <a (click)=\"pong()\">Pong</a>\n      </div>\n    </div>\n    <br>\n    <!--If we've selected a game profile, to load a component-->\n    <div *ngIf=\"game_profile\" id=\"gameSpace\">\n      <router-outlet></router-outlet>\n    </div>\n    <!--Global chat space-->\n    <div id=\"chatSpace\">\n      <div id=\"messageSpace\">\n        <div *ngFor='let message of messages'>\n          <!--({{ message.createdAt | date: 'shortTime' }})-->\n          {{ message.name }}: {{ message.message }}\n        </div>\n      </div>\n      \n      <form #msgForm='ngForm' (submit)=onSubmit(msgForm)>\n        <input id=\"msg_input\" type=\"text\" name=\"message\"\n        [(ngModel)]='message_obj.message'\n        #message='ngModel'\n        required>\n        <input id=\"submitMsg\" type=\"submit\" value=\"Send\">\n      </form>\n      <div *ngIf='message.errors && (msgForm.submitted )' class='red'>\n        <li *ngIf='message.errors.required'>Message is required</li>\n      </div>\n    </div>\n  </div>\n\n</div>"
+module.exports = "<div id=\"big_wrapper\">\n  <div id=\"topBar\">\n    <h3 id=\"activeUser\">Welcome: {{activeUser}}</h3>\n    <!--logout button-->\n    <div class=\"right\" id=\"optionBar\">\n      <a (click)=\"logoutUser()\" class=\"btn btn-primary btn-lg active btn-xs\" >logout</a>\n    </div>\n  </div>\n\n  <div id=\"onlinePlayers\">\n    <h5 id=\"online_header\">Look who's online</h5>\n    <div *ngFor=\"let player of players\">\n      {{player.name}}\n    </div>\n  </div>\n\n  <div id=\"rightSpace\">\n\n    <!--If we have not yet selected a game profile...-->\n    <div *ngIf=\"!game_profile\" id=\"gameSpace\">\n      <h1 id=\"games_title\">Games:</h1>\n      <div id=\"game_selector\">\n        <a (click)=\"pong()\">Pong</a>\n      </div>\n    </div>\n    <br>\n    <!--If we've selected a game profile, to load a component-->\n    <div *ngIf=\"game_profile\" id=\"gameSpace\">\n      <router-outlet></router-outlet>\n    </div>\n    <!--Global chat space-->\n    <div id=\"chatSpace\">\n      <div id=\"messageSpace\">\n        <div *ngFor='let message of messages'>\n          ({{ message.createdAt | date: 'shortTime' }})\n          {{ message.name }}: {{ message.message }}\n        </div>\n      </div>\n      \n      <form #msgForm='ngForm' (submit)=onSubmit(msgForm)>\n        <input id=\"msg_input\" type=\"text\" name=\"message\"\n        [(ngModel)]='message_obj.message'\n        #message='ngModel'\n        required>\n        <input id=\"submitMsg\" type=\"submit\" value=\"Send\">\n      </form>\n      <div *ngIf='message.errors && (msgForm.submitted )' class='red'>\n        <li *ngIf='message.errors.required'>Message is required</li>\n      </div>\n    </div>\n  </div>\n\n</div>"
 
 /***/ }),
 
@@ -350,8 +349,6 @@ var DashboardComponent = (function () {
         this._router = _router;
         this._cookieService = _cookieService;
         this._chatService = _chatService;
-        this.test_messages = [];
-        this.message = '';
         this.messages = [];
         this.message_obj = {
             message: '',
@@ -384,10 +381,11 @@ var DashboardComponent = (function () {
         this._chatService.sendMessage(this.message_obj);
         this._httpService.createMessage(this.message_obj)
             .then(function (obj) {
-            form.resetForm();
+            // form.resetForm();
             _this._httpService.getMessage()
                 .then(function (data) {
                 _this.messages = data.reverse();
+                form.resetForm();
             })
                 .catch(function (err) { console.log(err); });
         })
@@ -417,8 +415,11 @@ var DashboardComponent = (function () {
         }
         else {
             this.connection = this._chatService.getMessages().subscribe(function (message) {
-                console.log('pushing now');
-                _this.messages.push(message);
+                _this._httpService.getMessage()
+                    .then(function (data) {
+                    _this.messages = data.reverse();
+                })
+                    .catch(function (err) { console.log(err); });
             });
             this.game_profile = false;
             this.activeUser = this._cookieService.get('username');
