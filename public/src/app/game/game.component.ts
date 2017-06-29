@@ -7,6 +7,7 @@ import { CookieService } from 'angular2-cookie/services/cookies.service';
 // declare var pong: any;
 // declare var golf: any;
 declare var playGame: any;
+declare var startPong: any;
 
 @Component({
   selector: 'app-game',
@@ -17,6 +18,7 @@ export class GameComponent implements OnInit {
 
   loadPong() {
     console.log("inside of loadPong");
+    new startPong(this.game_profile);
     new playGame(this.game_profile);
     //new pong(); // starts the pong game
   }
@@ -24,6 +26,7 @@ export class GameComponent implements OnInit {
   loadGolf() {
     console.log("inside loadGolf")
     new playGame(this.game_profile);
+    new startPong(this.game_profile);
     //new golf(); // starts the pong game
   }
 

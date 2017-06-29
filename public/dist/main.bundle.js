@@ -566,12 +566,14 @@ var GameComponent = (function () {
     }
     GameComponent.prototype.loadPong = function () {
         console.log("inside of loadPong");
+        new startPong(this.game_profile);
         new playGame(this.game_profile);
         //new pong(); // starts the pong game
     };
     GameComponent.prototype.loadGolf = function () {
         console.log("inside loadGolf");
         new playGame(this.game_profile);
+        new startPong(this.game_profile);
         //new golf(); // starts the pong game
     };
     GameComponent.prototype.ngOnInit = function () {

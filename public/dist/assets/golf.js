@@ -9,7 +9,7 @@ function playGame(game_profile) {
 	if(game_profile == "golf"){
 		playGolf = true;
 		console.log("playing golf!", playGolf);
-		pong();
+		golf();
 	}
 }
 

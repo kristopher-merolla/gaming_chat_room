@@ -1,7 +1,7 @@
 // Code from:
 // https://github.com/maxwihlborg/youtube-tutorials/blob/master/pong/index.html
 
-function playGame(game_profile) {
+function startPong(game_profile) {
 	if(game_profile != "pong"){
 		console.log("not playing pong...");
 		playPong = false;
