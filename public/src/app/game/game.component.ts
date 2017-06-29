@@ -4,8 +4,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 
 // variables for js file functions
-declare var pong: any;
-declare var golf: any;
+// declare var pong: any;
+// declare var golf: any;
+declare var playGame: any;
 
 @Component({
   selector: 'app-game',
@@ -15,11 +16,15 @@ declare var golf: any;
 export class GameComponent implements OnInit {
 
   loadPong() {
-    new pong(); // starts the pong game
+    console.log("inside of loadPong");
+    new playGame(this.game_profile);
+    //new pong(); // starts the pong game
   }
 
   loadGolf() {
-    new golf(); // starts the pong game
+    console.log("inside loadGolf")
+    new playGame(this.game_profile);
+    //new golf(); // starts the pong game
   }
 
   constructor(private _httpService: HttpService, private _router: Router, private _cookieService:CookieService) {

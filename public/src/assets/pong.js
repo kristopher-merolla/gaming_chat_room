@@ -1,6 +1,18 @@
 // Code from:
 // https://github.com/maxwihlborg/youtube-tutorials/blob/master/pong/index.html
 
+function playGame(game_profile) {
+	if(game_profile != "pong"){
+		console.log("not playing pong...");
+		playPong = false;
+	}
+	if(game_profile == "pong"){
+		playPong = true;
+		console.log("playing pong!", playPong);
+		pong();
+	}
+}
+
 var
 /**
  * Constants
@@ -16,6 +28,7 @@ DownArrow = 40,
 canvas,
 ctx,
 keystate,
+playPong,
 /**
  * The player paddle
  * 
@@ -127,7 +140,7 @@ ball = {
 		var pdle = this.vel.x < 0 ? player : ai;
 		if (AABBIntersect(pdle.x, pdle.y, pdle.width, pdle.height,
 				this.x, this.y, this.side, this.side)
-		) {	
+		) {
 			// set the x position and calculate reflection angle
 			this.x = pdle===player ? player.x+player.width : ai.x - this.side;
 			var n = (this.y+this.side - pdle.y)/(pdle.height+this.side);
@@ -154,29 +167,33 @@ ball = {
  * Starts the game
  */
 function pong() {
-	// create, initiate and append game canvas
-	canvas = document.createElement("canvas");
-	canvas.width = WIDTH;
-	canvas.height = HEIGHT;
-	ctx = canvas.getContext("2d");
-	//document.body.appendChild(canvas);
-    document.getElementById("canvas").appendChild(canvas); // replaces the above
-	keystate = {};
-	// keep track of keyboard presses
-	document.addEventListener("keydown", function(evt) {
-		keystate[evt.keyCode] = true;
-	});
-	document.addEventListener("keyup", function(evt) {
-		delete keystate[evt.keyCode];
-	});
-	init(); // initiate game objects
-	// game loop function
-	var loop = function() {
-		update();
-		draw();
+	if (playPong){
+		// create, initiate and append game canvas
+		canvas = document.createElement("canvas");
+		canvas.width = WIDTH;
+		canvas.height = HEIGHT;
+		ctx = canvas.getContext("2d");
+		//document.body.appendChild(canvas);
+		document.getElementById("canvas").appendChild(canvas); // replaces the above
+		keystate = {};
+		// keep track of keyboard presses
+		document.addEventListener("keydown", function(evt) {
+			keystate[evt.keyCode] = true;
+		});
+		document.addEventListener("keyup", function(evt) {
+			delete keystate[evt.keyCode];
+		});
+		init(); // initiate game objects
+		// game loop function
+		var loop = function() {
+			if(playPong){
+				update();
+				draw();
+				window.requestAnimationFrame(loop, canvas);
+			}
+		};
 		window.requestAnimationFrame(loop, canvas);
-	};
-	window.requestAnimationFrame(loop, canvas);
+	}
 }
 /**
  * Initatite game objects and set start positions

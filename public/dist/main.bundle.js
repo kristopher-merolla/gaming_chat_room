@@ -565,10 +565,14 @@ var GameComponent = (function () {
         this._cookieService = _cookieService;
     }
     GameComponent.prototype.loadPong = function () {
-        new pong(); // starts the pong game
+        console.log("inside of loadPong");
+        new playGame(this.game_profile);
+        //new pong(); // starts the pong game
     };
     GameComponent.prototype.loadGolf = function () {
-        new golf(); // starts the pong game
+        console.log("inside loadGolf");
+        new playGame(this.game_profile);
+        //new golf(); // starts the pong game
     };
     GameComponent.prototype.ngOnInit = function () {
         var url = this._router.url; // we know this will contain "/dashboard/" and then the game
