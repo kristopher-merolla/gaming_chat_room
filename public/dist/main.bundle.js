@@ -408,6 +408,8 @@ var DashboardComponent = (function () {
     };
     DashboardComponent.prototype.toDashboard = function () {
         this.game_profile = false;
+        new startGolf(this.game_profile);
+        new startPong(this.game_profile);
         this._router.navigate(['dashboard']);
     };
     DashboardComponent.prototype.logoutUser = function () {
@@ -486,10 +488,6 @@ var DashboardComponent = (function () {
         this.game_profile = true;
         this._router.navigateByUrl("/dashboard/golf");
     };
-    DashboardComponent.prototype.snake = function () {
-        this.game_profile = true;
-        this._router.navigateByUrl("/dashboard/snake");
-    };
     return DashboardComponent;
 }());
 __decorate([
@@ -518,7 +516,7 @@ exports = module.exports = __webpack_require__("../../../../css-loader/lib/css-b
 
 
 // module
-exports.push([module.i, "#canvas {\n    margin-top: -20px;\n}\n\n/*#pong_space {\n    border: 1px dotted red;\n    margin-top: -20px;\n}*/", ""]);
+exports.push([module.i, ".canvas {\n    margin-top: -20px;\n}\n\n/*#pong_space {\n    border: 1px dotted red;\n    margin-top: -20px;\n}*/", ""]);
 
 // exports
 
@@ -531,7 +529,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/game/game.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "\n\n<div id=\"big_wrapper\">\n\n  <!--<h1>{{game_profile}}</h1>-->\n\n\n\n<!--Game canvas div-->\n<div id=\"canvas\"></div>\n<!--Need to give credit for pong game-->\n\n\n</div>\n"
+module.exports = "\n\n<div id=\"big_wrapper\">\n\n  <!--<h1>{{game_profile}}</h1>-->\n\n\n<!--Game canvas div-->\n<div id=\"canvasPong\" class=\"canvas\"></div>\n<div id=\"canvasGolf\" class=\"canvas\"></div>\n<!--Need to give credit for pong game-->\n\n\n</div>\n"
 
 /***/ }),
 
@@ -567,12 +565,12 @@ var GameComponent = (function () {
     GameComponent.prototype.loadPong = function () {
         console.log("inside of loadPong");
         new startPong(this.game_profile);
-        new playGame(this.game_profile);
+        new startGolf(this.game_profile);
         //new pong(); // starts the pong game
     };
     GameComponent.prototype.loadGolf = function () {
         console.log("inside loadGolf");
-        new playGame(this.game_profile);
+        new startGolf(this.game_profile);
         new startPong(this.game_profile);
         //new golf(); // starts the pong game
     };

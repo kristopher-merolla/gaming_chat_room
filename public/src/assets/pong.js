@@ -3,7 +3,6 @@
 
 function startPong(game_profile) {
 	if(game_profile != "pong"){
-		console.log("not playing pong...");
 		playPong = false;
 	}
 	if(game_profile == "pong"){
@@ -174,7 +173,7 @@ function pong() {
 		canvas.height = HEIGHT;
 		ctx = canvas.getContext("2d");
 		//document.body.appendChild(canvas);
-		document.getElementById("canvas").appendChild(canvas); // replaces the above
+		document.getElementById("canvasPong").appendChild(canvas); // replaces the above
 		keystate = {};
 		// keep track of keyboard presses
 		document.addEventListener("keydown", function(evt) {
@@ -217,9 +216,10 @@ function update() {
  * Clear canvas and draw all game objects and net
  */
 function draw() {
+	ctx.fillStyle = "black";
 	ctx.fillRect(0, 0, WIDTH, HEIGHT);
 	ctx.save();
-	ctx.fillStyle = "#fff";
+	ctx.fillStyle = "white";
 	ball.draw();
 	player.draw();
 	ai.draw();

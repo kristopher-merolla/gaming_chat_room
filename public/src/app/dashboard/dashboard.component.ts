@@ -4,6 +4,10 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { CookieService } from 'angular2-cookie/core';
 import { ChatService } from './../chat.service';
 
+// variables for js file functions
+declare var startGolf: any;
+declare var startPong: any;
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -60,8 +64,10 @@ export class DashboardComponent implements OnInit, OnDestroy{
     .catch(err=>{console.log(err);})
   }
 
-  toDashboard(){
+  toDashboard() {
     this.game_profile = false;
+    new startGolf(this.game_profile);
+    new startPong(this.game_profile);
     this._router.navigate(['dashboard']);
   }
 
@@ -147,8 +153,8 @@ export class DashboardComponent implements OnInit, OnDestroy{
     this._router.navigateByUrl("/dashboard/golf");
   }
 
-  snake() {
-    this.game_profile = true;
-    this._router.navigateByUrl("/dashboard/snake");
-  }
+  // snake() {
+  //   this.game_profile = true;
+  //   this._router.navigateByUrl("/dashboard/snake");
+  // }
 }
