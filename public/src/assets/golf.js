@@ -1,6 +1,18 @@
 // GOLF GAME
 // 6/28/2017
 
+function playGame(game_profile) {
+	if(game_profile != "golf"){
+		console.log("not playing golf...");
+		playGolf = false;
+	}
+	if(game_profile == "golf"){
+		playGolf = true;
+		console.log("playing golf!", playGolf);
+		pong();
+	}
+}
+
 // Variable Declarations
 var
 // Constant Variables
