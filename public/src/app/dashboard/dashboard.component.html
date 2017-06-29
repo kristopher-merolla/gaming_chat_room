@@ -16,14 +16,9 @@
         </div> <!--player names-->
       </div> <!--playerList-->
     </div> <!--onlinePlayers-->
-
     <div id="middle">
-      <h1>Game will load here. What to put here while game is not loaded?</h1>
-      <h1>Options...</h1>
-      - Panning game images <br>
-      - One image with short game description <br>
-      - Clickable game images that will load game <br>
       <div id="gameSpace" *ngIf="game_profile">
+        <br>
         <router-outlet></router-outlet>
       </div>
     </div> <!--middle-->

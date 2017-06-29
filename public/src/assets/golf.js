@@ -92,12 +92,14 @@ golfBall = {
             this.y -= this.velocity.y*(1/20);
             this.velocity.x -= 0.01;
             // boundry for y movement
-            if (this.y >= canvasHeight-15-3) {
-                this.velocity.y = 0;
+            console.log(this.velocity.y);
+            if (this.y >= canvasHeight-15-this.radius) {
+                this.velocity.y = -(this.velocity.y/2);
             }
             else {
                 this.velocity.y -= 0.1;
             }
+
             this.draw();
         }
     },
