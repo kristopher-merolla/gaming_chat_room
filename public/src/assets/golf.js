@@ -74,6 +74,32 @@ function golf() {
 		delete keyState[evt.keyCode];
 	});
 	
+    // Draw function (create elements and canvas for each step)
+    function draw() {
+        ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+        ctx.save();
+        ctx.fillStyle = "#6698FF";
+        // golfer.draw();
+        // ball.draw();
+        // tee.draw();
 
+        // Draw grass
+        var w = 4;
+        var x = (canvasWidth - w)*0.5;
+        var y = 0;
+        var step = canvasHeight/20; // how many net segments
+        while (y < canvasHeight) {
+            ctx.fillRect(x, y+step*0.25, w, step*0.5);
+            y += step;
+        }
+    }
+	ctx.restore();
 
+    // Game Loop
+    var loop = function() {
+		// update();
+		draw();
+		window.requestAnimationFrame(loop, canvas);
+	};
+	window.requestAnimationFrame(loop, canvas);
 }
