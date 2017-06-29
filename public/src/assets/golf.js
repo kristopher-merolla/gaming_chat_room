@@ -32,9 +32,11 @@ keyState,
 golfBall = {
     x: null,
     y: null,
+    inHole: false,
+    strokes: 0,
     velocity: {x:0,y:0},
     radius: 3,
-    speed: 20,
+    speed: 10,
     theta: 0.785398, // roughly 45 degrees (in rad)
     // hit function to hit the ball
     hit: function() {
@@ -72,11 +74,11 @@ golfBall = {
             console.log("speed:",this.speed);
         }
         if (keyState[ArrowRight]) {
-            if (this.speed < 30) {
+            if (this.speed < 15) {
                 this.speed += 0.1;
             }
-            if (this.speed >=30) {
-                this.speed = 30;
+            if (this.speed >=15) {
+                this.speed = 15;
             }
             console.log("speed:",this.speed);
         }
@@ -88,28 +90,40 @@ golfBall = {
             if (this.velocity.x < 0) {
                 this.velocity.x = 0;
             }
-            this.x += this.velocity.x*(1/15);
-            this.y -= this.velocity.y*(1/20);
-            this.velocity.x -= 0.01;
+            this.x += this.velocity.x*(1/5);
+            this.y -= this.velocity.y*(1/7);
             // boundry for y movement
-            console.log("velocity-y:",this.velocity.y);
-            console.log("position-y:",this.y);
-            if ((this.y-this.velocity.y*(1/20)) >= canvasHeight-15-this.radius) { // 460 - 15 - 3 = 442
+            // console.log("velocity-y:",this.velocity.y);
+            // console.log("position-y:",this.y);
+            if ((this.y-this.velocity.y*(1/10)) >= canvasHeight-15-this.radius) { // ball hit/on ground
                 this.velocity.y = -(this.velocity.y/2);
+                this.velocity.x -= 0.06;
             }
-            else {
+            else { // ball is in the air
                 this.velocity.y -= 0.1;
+                this.velocity.x -= 0.01;
             }
-
+            // boundry for x movement
+            if (((this.x >= tee.x-1) && (this.x <= tee.x+1)) && ((this.y-this.velocity.y*(1/10)) >= canvasHeight-15-this.radius)) {
+                console.log("hit tee");
+                this.inHole = true;
+                initGolf();
+            }
+            if (this.x >= canvasWidth) {
+                this.x = 0;
+            }
+            //
             this.draw();
         }
     },
     // draw function
     draw: function() {
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius, 0, 2*pi);
-        ctx.stroke();
-        ctx.fill();
+        if (!this.inHole){ // if the ball is not in the hole...
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.radius, 0, 2*pi);
+            ctx.stroke();
+            ctx.fill();
+        }
     }
 },
 // Tee object
@@ -154,6 +168,9 @@ function golf() {
 		keyState[evt.keyCode] = true;
 	});
 	document.addEventListener("keyup", function(evt) {
+        if (keyState[Spacebar]) {
+            golfBall.strokes ++;
+        }
 		delete keyState[evt.keyCode];
 	});
 
@@ -178,6 +195,10 @@ function initGolf(){
     // golf ball
     golfBall.x = 10;
     golfBall.y = canvasHeight-20;
+    golfBall.inHole = false;
+    golfBall.velocity.x = 0;
+    golfBall.velocity.y = 0;
+    golfBall.strokes = 0;
 }
 
 function updateGolf() {
@@ -199,6 +220,11 @@ function drawGolf() {
     // draw tee
     ctx.fillStyle = "black"; // tee color
     tee.draw();
+    // draw header
+    ctx.fillStyle = "black";
+    ctx.font = "30px Arial";
+    let header = "Hole 1 - Strokes: " + golfBall.strokes;
+    ctx.fillText(header,10,40);
     
     ctx.restore();
 }
