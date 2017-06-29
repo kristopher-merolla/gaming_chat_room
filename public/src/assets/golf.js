@@ -78,11 +78,11 @@ function golf() {
     function draw() {
         ctx.fillRect(0, 0, canvasWidth, canvasHeight);
         ctx.save();
-        ctx.fillStyle = "#6698FF";
+        ctx.fillStyle = "#6698FF"; // sky color
         // golfer.draw();
         // ball.draw();
         // tee.draw();
-
+        // document.getElementById("canvas").style.background = '#6698FF';
         // Draw grass
         var w = 4;
         var x = (canvasWidth - w)*0.5;
@@ -92,8 +92,9 @@ function golf() {
             ctx.fillRect(x, y+step*0.25, w, step*0.5);
             y += step;
         }
+        ctx.restore();
     }
-	ctx.restore();
+	
 
     // Game Loop
     var loop = function() {
