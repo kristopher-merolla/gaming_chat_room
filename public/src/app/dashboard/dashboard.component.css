@@ -1,92 +1,170 @@
-#big_wrapper {
-    border-radius: 10px;
-    width: 1280px;
-    height: 720px;
-    margin: 0px auto;
-    background-color: lightskyblue;
-    border-top: 2px solid darkslategray;
+* {
+    padding: 0px;
+    margin: 0px;
 }
-
+div#big_wrapper {
+    height: 100vh;
+    background-color: #0e0e0e;
+}
+div#topBar {
+    background-color: #ff6c60;
+    height: 60px;
+}
+div#innerTop {
+    margin: auto;
+    width: 1200px;
+    height: 60px;
+    padding-top: 15px;
+}
+#title{
+    color: #333;
+}
+h3 {
+    display: inline-block;
+    font-size: 24pt;
+    margin-right: 20px;
+}
+button {
+    background-color: #ff7a5a;
+    margin-bottom: 15px;
+    margin-right: 15px;
+    width: 50px;
+    height: 25px;
+    border: none;
+    color: white;
+    font-weight: 200;
+}
+#logout_button{
+    float: right;
+}
+div#body {
+    background-color: #323232;
+    width: 1200px;
+    margin: auto;
+    margin-top: 30px;
+    height: 650px;
+}
+div#onlinePlayers {
+    display: inline-block;
+    width: 190px;
+    height: 650px;
+    padding: 5px;
+    vertical-align: top;
+    color: #ff8f00;
+    background-color: #282828;
+}
+div#playerList {
+    background-color: #404040;
+    overflow: scroll;
+    border-radius: 5px;
+    height: 400px;
+    padding-left: 10px;
+    padding-top: 10px;
+}
+#online_header {
+    color: darkslategray;
+    margin-bottom: 10px;
+}
+div#middle {
+    vertical-align: top;
+    background-color: #484848;
+    width: 700px;
+    height: 650px;
+    display: inline-block;
+    padding: 10px;
+}
+div#chatSpace {
+    vertical-align: top;
+    display: inline-block;
+    background-color: #282828;
+    width: 300px;
+    height: 650px;
+    padding: 10px;
+}
+div#msgSpace {
+    overflow: scroll;
+    background-color: #404040;
+    height: 600px;
+    border-radius: 5px;
+    padding: 5px;
+}
+.msg_user {
+    color: #f78f00;
+}
+.msg_msg {
+    color: white;
+}
+#msg_input {
+    width: 220px;
+    height: 25px;
+    margin-top: 5px;
+    border: none;
+    border-radius: 5px 0 0 5px;
+}
+#submitMsg {
+    height: 25px;
+    width: 55px;
+    background-color: #ff6c60;
+    color: white;
+    border-radius: 0 5px 5px 0;
+    border: none;
+}
+div#gameSpace {
+    background-color: yellow;
+    display: inline-block;
+}
 .red {
     color: red;
 }
-
-#games_title {
-    text-align: middle;
-}
-
-.right {
-    text-align: right;
-}
-
-#activeUser {
+/*#activeUser {
     display: inline-block;
     width: 95%;
     padding-left: 10px;
     color: darkslategray;
-}
-
-#online_header {
-    color: darkslategray;
-    text-align: center;
-}
+}*/
 
 #optionBar {
     display: inline-block;
     text-align: right;
+    margin-bottom: 10px;
 }
 
-#rightSpace {
+/*#rightSpace {
     display: inline-block;
     width: 1060px;
     height: 661px;
     margin-left: -4px;
-}
+}*/
 
-#topBar {
-    border-bottom: 2px solid darkslategray;
-}
-
-#onlinePlayers {
+/*#onlinePlayers {
     display: inline-block;
     vertical-align: top;
     border-right: 2px solid darkslategray;
     width: 220px;
-    height: 662px;
-    padding: 10px;
-}
+}*/
 
-#gameSpace {
+/*#gameSpace {
     width: 1052px;
     height: 461px;
     padding: 10px;
     display: inline-block;
-}
+}*/
 
-#game_selector {
+/*#game_selector {
     display: inline-block;
-}
+}*/
 
-#chatSpace {
-    background-color: white;
-    border-top: 2px solid darkslategray;
-    width: 1060px;
-    padding: 5px;
-    border-bottom-right-radius: 5px;
-    /*overflow: scroll;*/
-}
-
-#msg_input{
+/*#msg_input{
     width: 965px;
     border-radius: 5px;
     border: 2px solid silver;
-}
-
+}*/
+/*
 #messageSpace {
     width: 1060px;
     height: 160px;
     overflow: scroll;
     padding: 10px;
     border-bottom-right-radius: 10px;
-}
+}*/
 

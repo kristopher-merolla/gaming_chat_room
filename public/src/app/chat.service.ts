@@ -3,11 +3,12 @@ import { Observable } from 'rxjs/Observable';
 import * as io from 'socket.io-client';
 
 export class ChatService {
-  private url = 'http://localhost:8000/dashboard';
+  private url = 'http://localhost:8000';
   private socket;
 
   sendMessage(message) {
     this.socket = io(this.url);
+    console.log(message);
     this.socket.emit('add-message', message);
   }
 

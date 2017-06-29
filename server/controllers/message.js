@@ -12,6 +12,6 @@ module.exports = {
     Message.find(function(err, data){
       if(err) {console.log(err);}
       if(data) {res.json(data);}
-    }).sort({'createdAt': -1}).limit(10);
+    }).sort({'createdAt': -1}).limit(40);
   },
 };
