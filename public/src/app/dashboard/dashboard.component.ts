@@ -60,6 +60,11 @@ export class DashboardComponent implements OnInit, OnDestroy{
     .catch(err=>{console.log(err);})
   }
 
+  toDashboard(){
+    this.game_profile = false;
+    this._router.navigate(['dashboard']);
+  }
+
   logoutUser() {
     // get user id
     this._httpService.getUserId(this.activeUser)
