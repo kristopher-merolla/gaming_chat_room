@@ -107,9 +107,20 @@ golfBall = {
             }
             // boundry for x movement
             if (((this.x >= tee.x-1) && (this.x <= tee.x+1)) && ((this.y-this.velocity.y*(1/10)) >= canvasHeight-15-this.radius)) {
-                console.log("hit tee");
+                // console.log("hit tee");
                 this.inHole = true;
-                initGolf();
+                tee.holeNumber ++;
+                if (!tee.holeNumber || (tee.holeNumber==0)) { // for zeroth level
+                    console.log("tee 0");
+                    initGolf();
+                }
+                if (tee.holeNumber==1) {
+                    initGolf1();
+                }
+                else {
+                    tee.holeNumber = 0;
+                    initGolf();
+                }
             }
             if (this.x >= canvasWidth) {
                 this.x = 0;
@@ -125,7 +136,7 @@ golfBall = {
             ctx.arc(this.x, this.y, this.radius, 0, 2*pi);
             ctx.stroke();
             ctx.fill();
-            console.log("golfBall Vel",golfBall.velocity.x)
+            // console.log("golfBall Vel",golfBall.velocity.x)
         }
     }
 },
@@ -137,6 +148,7 @@ tee = {
     yflag: null,
     width: 2,
     height: 40,
+    holeNumber: null,
     // draw function
     draw: function() {
         // draw pole
@@ -177,20 +189,44 @@ function golf() {
 		delete keyState[evt.keyCode];
 	});
 
-    // initialize objects (starting positions)
-    initGolf();
+    // initialize level and objects starting position
+    // level selector (based on tee.holeNumber)
+    if (!tee.holeNumber || (tee.holeNumber==0)) { // for zeroth level
+        console.log("tee 0");
+        initGolf();
+    }
+    if (tee.holeNumber==1) {
+        console.log("tee 1");
+        initGolf1();
+    }
 
     // Game Loop
     var loop = function() {
 		updateGolf();
-		drawGolf();
+        if (!tee.holeNumber || (tee.holeNumber==0)){
+            drawGolf();
+        }
+        if (tee.holeNumber==1) {
+            drawGolf1();
+        }
 		window.requestAnimationFrame(loop, canvas);
 	};
 	window.requestAnimationFrame(loop, canvas); // run game loop
 }
 
+function updateGolf() {
+    // console.log("running update");
+    golfBall.update();
+}
+
+// Levels
+
+/////////////
+// level 0 //
+/////////////
 function initGolf(){
     // tee
+    tee.holeNumber = 0;
     tee.x = canvasWidth-25;
     tee.y = canvasHeight-55;
     tee.xflag = canvasWidth-25;
@@ -203,12 +239,6 @@ function initGolf(){
     golfBall.velocity.y = 0;
     golfBall.strokes = 0;
 }
-
-function updateGolf() {
-    // console.log("running update");
-    golfBall.update();
-}
-
 // Draw function (create elements and canvas for each step)
 function drawGolf() {
     ctx.fillRect(0, 0, canvasWidth, canvasHeight);
@@ -226,7 +256,56 @@ function drawGolf() {
     // draw header
     ctx.fillStyle = "black";
     ctx.font = "30px Arial";
-    let header = "Hole 1 - Strokes: " + golfBall.strokes;
+    let header = "Hole " + tee.holeNumber + " - Strokes: " + golfBall.strokes;
+    ctx.fillText(header,10,40);
+    if (golfBall.velocity.x <=0) {
+        // draw swing variables
+        ctx.beginPath();
+        ctx.arc(golfBall.x, golfBall.y, 40, 0, 1.5*pi+(0.5*pi-golfBall.theta), true);
+        ctx.stroke();
+        ctx.fillStyle = "black";
+        //ctx.rotate(1.5*pi+(0.5*pi-golfBall.theta));
+        ctx.fillRect(golfBall.x+golfBall.radius,golfBall.y,golfBall.speed*5,2);
+    }
+    
+    ctx.restore();
+}
+/////////////
+// level 1 //
+/////////////
+function initGolf1(){
+    // tee
+    tee.holeNumber = 1;
+    tee.x = canvasWidth-25;
+    tee.y = canvasHeight-55;
+    tee.xflag = canvasWidth-25;
+    tee.yflag = canvasHeight-55;
+    // golf ball
+    golfBall.x = 10;
+    golfBall.y = canvasHeight-20;
+    golfBall.inHole = false;
+    golfBall.velocity.x = 0;
+    golfBall.velocity.y = 0;
+    golfBall.strokes = 0;
+}
+// Draw function (create elements and canvas for each step)
+function drawGolf1() {
+    ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+    ctx.fillStyle = "purple"; // sky color
+    ctx.save();
+    // Draw grass
+    ctx.fillStyle = "#1B5E20"; // grass color
+    ctx.fillRect(0,canvasHeight-15,canvasWidth,15);
+    // draw ball
+    ctx.fillStyle = "white"; // grass color
+    golfBall.draw();
+    // draw tee
+    ctx.fillStyle = "black"; // tee color
+    tee.draw();
+    // draw header
+    ctx.fillStyle = "black";
+    ctx.font = "30px Arial";
+    let header = "Hole " + tee.holeNumber + " - Strokes: " + golfBall.strokes;
     ctx.fillText(header,10,40);
     if (golfBall.velocity.x <=0) {
         // draw swing variables
