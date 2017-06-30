@@ -15,8 +15,8 @@ function startGolf(game_profile) {
 // Variable Declarations
 var
 // Constant Variables
-canvasWidth = 860,
-canvasHeight = 460,
+canvasWidth = 700,
+canvasHeight = 600,
 pi = Math.PI,
 // User Inputs
 ArrowUp = 38,

@@ -9,24 +9,30 @@
   </div> <!--topBar-->
   <div id="body">
     <div id="onlinePlayers">
-      <h3 id="online_header">Players</h3>
       <div id="playerList">
-        <div *ngFor="let player of players">
+        <h3 id="online_header">Players Online</h3>
+        <div class="playerbox" *ngFor="let player of players">
           {{player.name}}
         </div> <!--player names-->
       </div> <!--playerList-->
     </div> <!--onlinePlayers-->
     <div id="middle">
+      <div *ngIf="!game_profile" (click)="pong()" class="game_selection pong">
+        <button class="game_icon"><img src="./../assets/pong.jpg" alt="pong.jpg"></button>
+      </div>
+      <div *ngIf="!game_profile" (click)="golf()" class="game_selection golf">
+        <button  id="golf_button"><img id="golf_pic" src="./../assets/golf.png" alt="golf.png"></button>
+      </div>
       <div id="gameSpace" *ngIf="game_profile">
         <br>
         <router-outlet></router-outlet>
-      </div>
+      </div> <!--gameSpace-->
     </div> <!--middle-->
 
     <div id="chatSpace">
       <div id="msgSpace">
         <div *ngFor='let message of messages'>
-          ({{ message.createdAt | date: 'shortTime' }})
+          <span class="msg_time">({{ message.createdAt | date: 'shortTime' }})</span>
           <span class="msg_user">{{ message.name }}</span>
           <span class="msg_msg">{{ message.message }}</span>
         </div>
