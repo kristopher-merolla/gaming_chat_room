@@ -40,9 +40,11 @@ golfBall = {
     theta: 0.785398, // roughly 45 degrees (in rad)
     // hit function to hit the ball
     hit: function() {
-        console.log("ball hit");
-        this.velocity.x = this.speed*Math.cos(this.theta);
-        this.velocity.y = this.speed*Math.sin(this.theta);
+        if (golfBall.velocity.x <=0) {
+            console.log("ball hit");
+            this.velocity.x = this.speed*Math.cos(this.theta);
+            this.velocity.y = this.speed*Math.sin(this.theta);
+        }
     },
     // update function
     update: function() {
@@ -123,6 +125,7 @@ golfBall = {
             ctx.arc(this.x, this.y, this.radius, 0, 2*pi);
             ctx.stroke();
             ctx.fill();
+            console.log("golfBall Vel",golfBall.velocity.x)
         }
     }
 },
@@ -225,10 +228,15 @@ function drawGolf() {
     ctx.font = "30px Arial";
     let header = "Hole 1 - Strokes: " + golfBall.strokes;
     ctx.fillText(header,10,40);
-    // draw swing variables
-    ctx.beginPath();
-    ctx.arc(golfBall.x, 120, 40, 0, 1.5*pi+(0.5*pi-golfBall.theta), true);
-    ctx.stroke();
+    if (golfBall.velocity.x <=0) {
+        // draw swing variables
+        ctx.beginPath();
+        ctx.arc(golfBall.x, golfBall.y, 40, 0, 1.5*pi+(0.5*pi-golfBall.theta), true);
+        ctx.stroke();
+        ctx.fillStyle = "black";
+        //ctx.rotate(1.5*pi+(0.5*pi-golfBall.theta));
+        ctx.fillRect(golfBall.x+golfBall.radius,golfBall.y,golfBall.speed*5,2);
+    }
     
     ctx.restore();
 }
