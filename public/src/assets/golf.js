@@ -225,6 +225,10 @@ function drawGolf() {
     ctx.font = "30px Arial";
     let header = "Hole 1 - Strokes: " + golfBall.strokes;
     ctx.fillText(header,10,40);
+    // draw swing variables
+    ctx.beginPath();
+    ctx.arc(golfBall.x, 120, 40, 0, 1.5*pi+(0.5*pi-golfBall.theta), true);
+    ctx.stroke();
     
     ctx.restore();
 }
