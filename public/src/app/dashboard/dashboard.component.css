@@ -11,11 +11,10 @@ div#topBar {
     height: 60px;
 }
 div#innerTop {
-    /*width: 1200px;*/
+    width: 1300px;
     height: 60px;
     padding-top: 15px;
-    margin-left: 20px;
-    margin-right: 20px;
+    margin: auto;
 }
 #title{
     color: #333;
@@ -24,6 +23,7 @@ h3 {
     display: inline-block;
     font-size: 24pt;
     margin-right: 20px;
+    cursor: pointer;
 }
 button {
     background-color: #ff7a5a;
@@ -39,12 +39,11 @@ button {
     float: right;
 }
 div#body {
-    background-color: #323232;
-    /*width: 1200px;*/
+    background-color: #282828;
     margin: auto;
-    height: 100vh;
-    /*margin-top: 30px;*/
-    /*height: 650px;*/
+    height: 93.5vh;
+    padding-left: 310px;
+    padding-right: 310px;
 }
 div#onlinePlayers {
     display: inline-block;
@@ -53,42 +52,62 @@ div#onlinePlayers {
     padding: 5px;
     vertical-align: top;
     color: #ff8f00;
-    background-color: #282828;
 }
 div#playerList {
-    background-color: #404040;
     overflow: scroll;
     border-radius: 5px;
     height: 400px;
     padding-left: 10px;
     padding-top: 10px;
 }
+.playerbox {
+    margin-left: 10px;
+    font-size: 12pt;
+}
 #online_header {
-    color: darkslategray;
+    color: white;
+    border-bottom: 1px solid white;
+    width: 100%;
+    font-size: 14pt;
     margin-bottom: 10px;
+    font-weight: 200;
 }
 div#middle {
     vertical-align: top;
     background-color: #484848;
-    width: 1010px;
-    height: 720px;
+    width: 700px;
+    height: 600px;
     display: inline-block;
-    padding: 10px;
+    margin: 15px;
+}
+.game_selection {
+    width: 700px;
+    height: 300px;
+    cursor: pointer;
+}
+.pong {
+    background-color: #0e1116;
+}
+.golf {
+    background-color: white;
+}
+#golf_pic {
+    margin-left: 400px;
 }
 div#chatSpace {
     vertical-align: top;
-    display: inline-block;
-    background-color: #282828;
-    width: 352px;
-    height: 720px;
+    width: 316px;
+    height: 590px;
     padding: 10px;
+    float: right;
+    margin-top: 15px;
 }
 div#msgSpace {
     overflow: scroll;
-    background-color: #404040;
-    height: 660px;
-    border-radius: 5px;
-    padding: 5px;
+    height: 562px;
+}
+.msg_time {
+    color: #181818;
 }
 .msg_user {
     color: #f78f00;
@@ -97,18 +116,17 @@ div#msgSpace {
     color: white;
 }
 #msg_input {
-    width: 272px;
+    width: 220px;
     height: 25px;
     margin-top: 5px;
     border: none;
-    border-radius: 5px 0 0 5px;
+    padding-left: 5px;
 }
 #submitMsg {
     height: 25px;
     width: 55px;
     background-color: #ff6c60;
     color: white;
-    border-radius: 0 5px 5px 0;
     border: none;
 }
 div#gameSpace {
@@ -117,55 +135,12 @@ div#gameSpace {
 .red {
     color: red;
 }
-/*#activeUser {
-    display: inline-block;
-    width: 95%;
-    padding-left: 10px;
-    color: darkslategray;
-}*/
-
-#optionBar {
-    display: inline-block;
-    text-align: right;
-    margin-bottom: 10px;
+#golf_button {
+    color: white;
+    background-color: white;
 }
-
-/*#rightSpace {
+img {
+    width: 300px;
+    height: 300px;
     display: inline-block;
-    width: 1060px;
-    height: 661px;
-    margin-left: -4px;
-}*/
-
-/*#onlinePlayers {
-    display: inline-block;
-    vertical-align: top;
-    border-right: 2px solid darkslategray;
-    width: 220px;
-}*/
-
-/*#gameSpace {
-    width: 1052px;
-    height: 461px;
-    padding: 10px;
-    display: inline-block;
-}*/
-
-/*#game_selector {
-    display: inline-block;
-}*/
-
-/*#msg_input{
-    width: 965px;
-    border-radius: 5px;
-    border: 2px solid silver;
-}*/
-/*
-#messageSpace {
-    width: 1060px;
-    height: 160px;
-    overflow: scroll;
-    padding: 10px;
-    border-bottom-right-radius: 10px;
-}*/
-
+}

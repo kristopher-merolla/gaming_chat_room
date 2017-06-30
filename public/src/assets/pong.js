@@ -16,8 +16,8 @@ var
 /**
  * Constants
  */
-WIDTH  = 560,
-HEIGHT = 460,
+WIDTH  = 700,
+HEIGHT = 600,
 pi = Math.PI,
 UpArrow   = 38,
 DownArrow = 40,
