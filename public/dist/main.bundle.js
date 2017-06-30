@@ -206,17 +206,15 @@ AppModule = __decorate([
 
 var ChatService = (function () {
     function ChatService() {
-        this.url = 'http://localhost:8000';
+        this.socket = __WEBPACK_IMPORTED_MODULE_1_socket_io_client__();
     }
     ChatService.prototype.sendMessage = function (message) {
-        this.socket = __WEBPACK_IMPORTED_MODULE_1_socket_io_client__(this.url);
         console.log(message);
         this.socket.emit('add-message', message);
     };
     ChatService.prototype.getMessages = function () {
         var _this = this;
         var observable = new __WEBPACK_IMPORTED_MODULE_0_rxjs_Observable__["Observable"](function (observer) {
-            _this.socket = __WEBPACK_IMPORTED_MODULE_1_socket_io_client__(_this.url);
             _this.socket.on('message', function (data) {
                 observer.next(data);
             });
@@ -229,7 +227,6 @@ var ChatService = (function () {
     ChatService.prototype.getSocketID = function () {
         var _this = this;
         var observable = new __WEBPACK_IMPORTED_MODULE_0_rxjs_Observable__["Observable"](function (observer) {
-            _this.socket = __WEBPACK_IMPORTED_MODULE_1_socket_io_client__(_this.url);
             _this.socket.on('user_logout', function (data) {
                 observer.next(data);
             });
